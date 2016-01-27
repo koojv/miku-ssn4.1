@@ -5,46 +5,8 @@ $(document).ready(function(){
     cssSelectorAncestor: "#jp_container_N"
   }, [
     {
-      title:"Busted Chump",
-      artist:"ADG3",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_bustedchump.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Chucked Knuckles",
-      artist:"3studios",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_chuckedknuckles.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Cloudless Days",
-      artist:"ADG3 Studios",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_cloudlessdays.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Core Issues",
-      artist:"Studios",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_coreissues.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Cryptic Psyche",
-      artist:"ADG3",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_crypticpsyche.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Electro Freak",
-      artist:"Studios",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_electrofreak.mp3",
-      poster: "images/m0.jpg"
-    },
-    {
-      title:"Freeform",
-      artist:"ADG",
-      mp3:"http://flatfull.com/themes/assets/musics/adg3com_freeform.mp3",
-      poster: "images/m0.jpg"
+      title:"発熱エモーション (新式ボカロ調教)",
+      mp3:"http://125.211.202.141:8023/MP3/sm27790524.mp3"
     }
   ], {
     playlistOptions: {
