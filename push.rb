@@ -18,6 +18,7 @@ end
 puts "[miku:bulid start]";
 print <<`EOC` 
     cd src
+    node_modules/.bin/webpack --progress --colors
 	jekyll build
 EOC
 puts "[miku:bulid done]";
