@@ -12,11 +12,14 @@
   <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />  
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>
     <script src="js/ie/excanvas.js"></script>
   <![endif]-->
+  <script src="http://cdn.bootcss.com/react/0.14.6/react.min.js"></script>
+  <script src="http://cdn.bootcss.com/react/0.14.6/react-dom.min.js"></script>
+  <script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body class="">
   <section class="vbox">
@@ -25,7 +28,7 @@
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
+        <a href="./" class="navbar-brand text-lt">
           <i class="icon-earphones"></i>
           <img src="images/logo.png" alt="." class="hide">
           <span class="hidden-nav-xs m-l-sm">shi-shi.net</span>
@@ -74,240 +77,7 @@
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
-        <aside class="bg-dark dk nav-xs aside hidden-print" id="nav">          
-          <section class="vbox">
-            <section class="w-f-md scrollable">
-              <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
-                
-
-
-                <!-- nav -->                 
-                <nav class="nav-primary hidden-xs">
-                  <ul class="nav bg clearfix">
-                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                      发现
-                    </li>
-                    <li>
-                      <a href="index.html">
-                        <i class="icon-disc icon text-success"></i>
-                        <span class="font-bold">湿娘主页</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-heart icon text-success"></i>
-                        <span class="font-bold">帮助我们</span>
-                      </a>
-                    </li>
-                  </ul>
-                  <ul class="nav" data-ride="collapse">
-                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                      分类索引
-                    </li>
-                    <li >
-                      <a href="#" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                        <i class="icon-music-tone-alt icon text-info"></i>
-                        <span>歌手</span>
-                      </a>
-                      <ul class="nav dk text-sm">
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps初音ミクjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    初音ミク
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps鏡音リン・レンjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    鏡音リン・レン
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps巡音ルカjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    巡音ルカ
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsKAITOjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    KAITO
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsMEIKOjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    MEIKO
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsGUMIjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    GUMI
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsIAjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    IA
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps結月ゆかりjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    結月ゆかり
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsがくっぽいどjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    がくっぽいど
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps猫村いろはjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    猫村いろは
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsUTAUjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    UTAU
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li >
-                      <a href="#" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                        <i class="icon-list icon  text-info-dker"></i>
-                        <span>曲风</span>
-                      </a>
-                      <ul class="nav dk text-sm">
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCAPOPjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    POP
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCAROCKjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    ROCK
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCAJAZZjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    JAZZ
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsボカロファンクjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    FUNK
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCARBjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    R&amp;B
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsボカロバラードjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    抒情
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsボカロクラシカjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    经典
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsボカロ演歌jpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    演歌
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCALOID和風曲jpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    和风曲
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVOCALOID民族調曲jpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    民族调曲
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li >
-                      <a href="#" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                        <i class="fa fa-microphone icon  text-primary"></i>
-                        <span>翻唱</span>
-                      </a>
-                      <ul class="nav dk text-sm">
-                            <li>
-                                <a class="taglink" href="#/list/tag/jps歌ってみたjpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    歌ってみた
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsVocaloidカバー曲jpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    Vocaloidカバー曲
-                                </a>
-                            </li>
-                            <li>
-                                <a class="taglink" href="#/list/tag/jpsUTAUカバー曲jpe/1">
-                                    <i class="fa fa-angle-right text-xs"></i>
-                                    UTAUカバー曲
-                                </a>
-                            </li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <ul class="nav text-sm">
-                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                        播放列表
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-star icon text-warning-dker"></i>
-                        <span>个人收藏</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon-clock icon text-info"></i>
-                        <span>最近播放</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!-- / nav -->
-              </div>
-            </section>
-          </section>
-        </aside>
+        <aside class="bg-dark dk nav-xs aside hidden-print" id="nav"></aside>
         <!-- /.aside -->
         <section id="content">
           <section class="vbox">
@@ -698,14 +468,20 @@
     </section>    
   </section>
   <script src="js/jquery.min.js"></script>
-  <!-- Bootstrap -->
   <script src="js/bootstrap.js"></script>
-  <!-- App -->
-  <script src="js/app.js"></script>  
   <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/app.plugin.js"></script>
-  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/demo.js"></script>
+  <script src="js/jPlayer/jquery.jplayer.min.js"></script>
+  <script src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  
+  <script src="cp/AsideCp.bundle.js"></script>
+  <script type="text/babel">
+      ReactDOM.render(
+            <AsideCp/>,
+            document.getElementById("nav")
+      );
+  </script>
+  <script src="js/app.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <script src="js/jPlayer/demo.js"></script>
 </body>
 </html>
