@@ -1,4 +1,8 @@
+require("./index.scss");
 AsideCp = React.createClass({
+  componentDidMount:function(){
+      
+  },
   render: function() {
     var singersData = ["初音ミク","鏡音リン","鏡音レン","巡音ルカ","KAITO","MEIKO","GUMI","IA","結月ゆかり","がくっぽいど","猫村いろは","UTAU"];
     var songStyleData =["POP","ROCK","JAZZ","FUNK","R&B","抒情","经典","演歌","和风曲","民族调曲"];
