@@ -1,6 +1,9 @@
 module.exports = {
     //注意目录规范
-    entry: {AsideCp:["./cpsrc/AsideCp/index.js"]},
+    entry: {AsideCp:["./cpsrc/AsideCp/index.js"],
+            AudioCp:["./cpsrc/AudioCp/index.js"],
+            HeaderCp:["./cpsrc/HeaderCp/index.js"],
+           },
     output: {
         //输出目录
         path:"./cp",
