@@ -7,7 +7,6 @@ HeaderCp = React.createClass({
         </a>
         <a href="./" className="navbar-brand text-lt">
           <i className="icon-earphones"></i>
-          <img src="images/logo.png" alt="." className="hide"/>
           <span className="hidden-nav-xs m-l-sm">shi-shi.net</span>
         </a>
         <a className="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">

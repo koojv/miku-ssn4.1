@@ -1,3 +1,4 @@
+require("./index.scss");
 AudioCp = React.createClass({
    componentDidMount:function(){
       //将myPlaylist暴露出去

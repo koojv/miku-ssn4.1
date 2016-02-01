@@ -1,3 +1,4 @@
+require("./index.scss");
 ListCp = React.createClass({
     getInitialState: function() {
         return{
