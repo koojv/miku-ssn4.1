@@ -3,6 +3,7 @@ module.exports = {
     entry: {AsideCp:["./cpsrc/AsideCp/index.js"],
             AudioCp:["./cpsrc/AudioCp/index.js"],
             HeaderCp:["./cpsrc/HeaderCp/index.js"],
+            ListCp:["./cpsrc/ListCp/index.js"]
            },
     output: {
         //输出目录

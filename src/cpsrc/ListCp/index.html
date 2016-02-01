@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="app">
+<head>  
+  <meta charset="utf-8" />
+  <title>湿湿娘V4.1</title>
+  <meta name="description" content=""/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="../../js/jPlayer/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/font.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/app.css" type="text/css" />  
+  <!--[if lt IE 9]>
+    <script src="../../js/ie/html5shiv.js"></script>
+    <script src="../../js/ie/respond.min.js"></script>
+    <script src="../../js/ie/excanvas.js"></script>
+  <![endif]-->
+  <script src="http://cdn.bootcss.com/react/0.14.6/react.min.js"></script>
+  <script src="http://cdn.bootcss.com/react/0.14.6/react-dom.min.js"></script>
+  <script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body class="">
+  <section class="vbox">
+    <header id="headerDiv" class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+    </header>
+    <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        <aside class="bg-dark dk nav-xs aside hidden-print" id="nav"></aside>
+        <!-- /.aside -->
+        <section id="content">
+            <section class="vbox">
+                <section class="w-f-md" id="bjax-target"></section>
+            </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.js"></script>
+  <script src="../../js/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="../../js/jPlayer/jquery.jplayer.min.js"></script>
+  <script src="../../js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  
+  <script src="../../cp/AsideCp.bundle.js"></script>
+  <script src="../../cp/HeaderCp.bundle.js"></script>
+  <script src="../../cp/ListCp.bundle.js"></script>
+  <script type="text/babel">
+      ReactDOM.render(
+            <AsideCp/>,
+            document.getElementById("nav")
+      );
+      ReactDOM.render(
+            <HeaderCp/>,
+            document.getElementById("headerDiv")
+      );
+      ReactDOM.render(
+            <ListCp/>,
+            document.getElementById("bjax-target")
+      );
+  </script>
+  <script src="../../js/app.js"></script>
+  <script src="../../js/app.plugin.js"></script>
+</body>
+</html>

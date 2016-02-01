@@ -55,7 +55,8 @@
 
 	AudioCp = React.createClass({displayName: "AudioCp",
 	   componentDidMount:function(){
-	      var myPlaylist = new jPlayerPlaylist({
+	      //将myPlaylist暴露出去
+	      myPlaylist = new jPlayerPlaylist({
 	        jPlayer: "#jplayer_N",
 	        cssSelectorAncestor: "#jp_container_N"
 	      }, [
