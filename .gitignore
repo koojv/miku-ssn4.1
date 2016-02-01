@@ -1,3 +1,4 @@
 .DS_Store
 build
 node.md
+/src/node_modules/node-sass/*

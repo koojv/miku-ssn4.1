@@ -27,7 +27,7 @@ HeaderCp = React.createClass({
             <span className="input-group-btn">
               <button type="submit" className="btn btn-sm bg-white btn-icon rounded"><i className="fa fa-search"></i></button>
             </span>
-            <input type="text" className="form-control input-sm no-border rounded" placeholder="Search songs, albums..."/>
+            <input type="text" className="form-control input-sm no-border rounded" placeholder="搜索歌曲、专辑..."/>
           </div>
         </div>
       </form>
