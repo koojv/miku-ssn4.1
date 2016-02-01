@@ -45,12 +45,12 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(7);
+	module.exports = __webpack_require__(9);
 
 
 /***/ },
 
-/***/ 7:
+/***/ 9:
 /***/ function(module, exports) {
 
 	HeaderCp = React.createClass({displayName: "HeaderCp",
@@ -62,7 +62,6 @@
 	        ), 
 	        React.createElement("a", {href: "./", className: "navbar-brand text-lt"}, 
 	          React.createElement("i", {className: "icon-earphones"}), 
-	          React.createElement("img", {src: "images/logo.png", alt: ".", className: "hide"}), 
 	          React.createElement("span", {className: "hidden-nav-xs m-l-sm"}, "shi-shi.net")
 	        ), 
 	        React.createElement("a", {className: "btn btn-link visible-xs", "data-toggle": "dropdown", "data-target": ".user"}, 
