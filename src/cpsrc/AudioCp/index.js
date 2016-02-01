@@ -9,6 +9,10 @@ AudioCp = React.createClass({
         {
           title:"発熱エモーション (新式ボカロ調教)",
           mp3:"http://125.211.202.141:8023/MP3/sm27790524.mp3"
+        },
+        {
+            title:"【初音ミクと巡音ルカが人間のように歌う】愛Dee【ルカが英語でラップ】",
+            mp3:"http://125.211.202.141:8023/?cmd=file&name=sm18047788.mp3"
         }
       ], {
         playlistOptions: {

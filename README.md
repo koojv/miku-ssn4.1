@@ -31,3 +31,4 @@ git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
 5. 组件开发过程使用"node_modules/.bin/webpack --progress --colors --watch"来打包组件，之后查看效果
 6. 已经开发的组件:AsideCp(网站侧边栏组件)
 
+
