@@ -1,5 +1,15 @@
 # miku-ssn4.1
 
+##关于开发工作流－0
+1. 以下两条命令可以帮助您快速建立本项目的开发环境
+2. 确保您使用的是您自己的fork库的地址
+3.
+```
+git clone -b master https://github.com/MIKUScallion/miku-ssn4.1.git
+cd miku-ssn4.1
+git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
+
+```
 ##关于开发工作流－1
 
 1. 检出master分支到任意目录（默认:miku-ssn4.1）
