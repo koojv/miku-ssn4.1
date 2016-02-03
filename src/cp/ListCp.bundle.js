@@ -373,11 +373,23 @@
 	    getInitialState: function() {
 	        return{
 	            data:null,
-	            loading:true
+	            loading:true,
+	            tag:null,
+	            parameter:{cmd: "list", page: "1", item: 18, by: "download", order: "down"}
 	        };
 	    },
 	    componentDidMount:function(){
-	        this._loadSongsData({page:1});
+	        this._loadSongsData(this.state.parameter);
+	        //
+	        var self = this;
+	        EventEmitter.subscribe("clickTag", function(data) {
+	            //console.log(data);
+	            self.state.tag = data;
+	            self.state.parameter.page = 1;
+	            self.state.parameter.range = "tag";
+	            self.state.parameter.keyword = self.state.tag;
+	            self._loadSongsData(self.state.parameter);
+	        });
 	    },
 	    render:function(){
 	        //console.log(this.state);
@@ -390,6 +402,12 @@
 	        var songData = new Array();
 	        var pageData = new Array();
 	        var pageTitle = "最新更新";
+	        var loadingClass = "";
+	        var errorClass = "";
+	        
+	        if(this.state.tag!=null){
+	            pageTitle = this.state.tag+"/"+pageTitle;
+	        }
 	        if(data&&data.STATUS=="[I]OK"){
 	            pageTitle = pageTitle +"("+data.CURRENTPAGE+"/"+data.TOTALPAGE+")";
 	            for(var i=0;i<data.COUNTPERPAGE;i++){
@@ -480,6 +498,8 @@
 	                }
 	                return pageData;
 	            }
+	        }else{
+	            errorClass = "error";    
 	        }
 	        var songs = songData.map(function(song) {
 	          return   React.createElement("div", {key: song.ID, className: "col-xs-6 col-sm-4 col-md-3 col-lg-2"}, 
@@ -503,14 +523,13 @@
 	            return React.createElement("li", {key: page.page, className: page.className}, React.createElement("a", {href: "#", className: "numPage"}, page.page));
 	        });
 	        //console.log(pages);
-	        var loadingClass = "";
 	        if(this.state.loading){
 	            loadingClass = "loading";
 	        }else{
 	            loadingClass = "loaded";
 	        }
 	        //console.log(loadingClass);
-	        return React.createElement("section", {className: loadingClass+" hbox stretch "}, 
+	        return React.createElement("section", {className: "hbox stretch "+loadingClass+" "+errorClass}, 
 	                React.createElement("section", null, 
 	                  React.createElement("section", {className: "vbox"}, 
 	                    React.createElement("section", {className: "scrollable padder-lg"}, 
@@ -529,11 +548,7 @@
 	                )
 	              );
 	    },
-	    _loadSongsData:function(parms){
-	        var parameter = {cmd: "list", page: "1", item: 18, by: "download", order: "down"};
-	        if(parms.page){
-	            parameter.page = parms.page;
-	        }
+	    _loadSongsData:function(parameter){
 	        this.setState({
 	            loading:true
 	        });
@@ -600,7 +615,9 @@
 	            if(page <= 0){
 	                return false;
 	            }
-	            this._loadSongsData({page:page});
+	            
+	            this.state.parameter.page = page;
+	            this._loadSongsData(this.state.parameter);
 	            return true;
 	        }
 	        if($target.hasClass("nextPage")||$target.parent().hasClass("nextPage")){
@@ -609,12 +626,14 @@
 	            if(page > data.TOTALPAGE){
 	                return false;
 	            }
-	            this._loadSongsData({page:page});
+	            this.state.parameter.page = page;
+	            this._loadSongsData(this.state.parameter);
 	            return true;
 	        }
 	        if($target.hasClass("numPage")){
 	            var page = parseInt($target.text());
-	            this._loadSongsData({page:page});
+	            this.state.parameter.page = page;
+	            this._loadSongsData(this.state.parameter);
 	            return true;
 	        }
 	    }
@@ -655,7 +674,7 @@
 
 
 	// module
-	exports.push([module.id, "#bjax-target .loading {\n  display: none; }\n\n@media (max-width: 767px) {\n  #bjax-target .pagination {\n    width: 100%; }\n    #bjax-target .pagination li {\n      display: none; }\n    #bjax-target .pagination li.nextPageLi, #bjax-target .pagination li.prePageLi, #bjax-target .pagination li.first, #bjax-target .pagination li.last {\n      display: inline-block;\n      text-align: center;\n      width: 25%; }\n      #bjax-target .pagination li.nextPageLi a, #bjax-target .pagination li.prePageLi a, #bjax-target .pagination li.first a, #bjax-target .pagination li.last a {\n        width: 100%; } }\n\n@media (max-width: 767px) {\n  #bjax-target .padder-lg {\n    padding-bottom: 60px; } }\n", ""]);
+	exports.push([module.id, "#bjax-target .loading {\n  display: none; }\n\n#bjax-target .error {\n  display: none; }\n\n@media (max-width: 767px) {\n  #bjax-target .pagination {\n    width: 100%; }\n    #bjax-target .pagination li {\n      display: none; }\n    #bjax-target .pagination li.nextPageLi, #bjax-target .pagination li.prePageLi, #bjax-target .pagination li.first, #bjax-target .pagination li.last {\n      display: inline-block;\n      text-align: center;\n      width: 25%; }\n      #bjax-target .pagination li.nextPageLi a, #bjax-target .pagination li.prePageLi a, #bjax-target .pagination li.first a, #bjax-target .pagination li.last a {\n        width: 100%; } }\n\n@media (max-width: 767px) {\n  #bjax-target .padder-lg {\n    padding-bottom: 60px; } }\n", ""]);
 
 	// exports
 

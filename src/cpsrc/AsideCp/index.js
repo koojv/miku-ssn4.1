@@ -109,6 +109,7 @@ AsideCp = React.createClass({
      var $target = $(event.target);
      var $li = $($target.parents("li")[0]);
      var tag = $li.text();
-     alert(tag);
+     EventEmitter.dispatch("clickTag",tag);
+     //alert(tag);
   }
 });

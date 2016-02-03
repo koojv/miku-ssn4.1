@@ -3,11 +3,23 @@ ListCp = React.createClass({
     getInitialState: function() {
         return{
             data:null,
-            loading:true
+            loading:true,
+            tag:null,
+            parameter:{cmd: "list", page: "1", item: 18, by: "download", order: "down"}
         };
     },
     componentDidMount:function(){
-        this._loadSongsData({page:1});
+        this._loadSongsData(this.state.parameter);
+        //
+        var self = this;
+        EventEmitter.subscribe("clickTag", function(data) {
+            //console.log(data);
+            self.state.tag = data;
+            self.state.parameter.page = 1;
+            self.state.parameter.range = "tag";
+            self.state.parameter.keyword = self.state.tag;
+            self._loadSongsData(self.state.parameter);
+        });
     },
     render:function(){
         //console.log(this.state);
@@ -20,6 +32,12 @@ ListCp = React.createClass({
         var songData = new Array();
         var pageData = new Array();
         var pageTitle = "最新更新";
+        var loadingClass = "";
+        var errorClass = "";
+        
+        if(this.state.tag!=null){
+            pageTitle = this.state.tag+"/"+pageTitle;
+        }
         if(data&&data.STATUS=="[I]OK"){
             pageTitle = pageTitle +"("+data.CURRENTPAGE+"/"+data.TOTALPAGE+")";
             for(var i=0;i<data.COUNTPERPAGE;i++){
@@ -110,6 +128,8 @@ ListCp = React.createClass({
                 }
                 return pageData;
             }
+        }else{
+            errorClass = "error";    
         }
         var songs = songData.map(function(song) {
           return   <div key={song.ID} className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -133,14 +153,13 @@ ListCp = React.createClass({
             return <li key={page.page} className={page.className}><a href="#" className="numPage">{page.page}</a></li>;
         });
         //console.log(pages);
-        var loadingClass = "";
         if(this.state.loading){
             loadingClass = "loading";
         }else{
             loadingClass = "loaded";
         }
         //console.log(loadingClass);
-        return <section className={loadingClass+" hbox stretch "}>
+        return <section className={"hbox stretch "+loadingClass+" "+errorClass}>
                 <section>
                   <section className="vbox">
                     <section className="scrollable padder-lg">
@@ -159,11 +178,7 @@ ListCp = React.createClass({
                 </section>
               </section>;
     },
-    _loadSongsData:function(parms){
-        var parameter = {cmd: "list", page: "1", item: 18, by: "download", order: "down"};
-        if(parms.page){
-            parameter.page = parms.page;
-        }
+    _loadSongsData:function(parameter){
         this.setState({
             loading:true
         });
@@ -230,7 +245,9 @@ ListCp = React.createClass({
             if(page <= 0){
                 return false;
             }
-            this._loadSongsData({page:page});
+            
+            this.state.parameter.page = page;
+            this._loadSongsData(this.state.parameter);
             return true;
         }
         if($target.hasClass("nextPage")||$target.parent().hasClass("nextPage")){
@@ -239,12 +256,14 @@ ListCp = React.createClass({
             if(page > data.TOTALPAGE){
                 return false;
             }
-            this._loadSongsData({page:page});
+            this.state.parameter.page = page;
+            this._loadSongsData(this.state.parameter);
             return true;
         }
         if($target.hasClass("numPage")){
             var page = parseInt($target.text());
-            this._loadSongsData({page:page});
+            this.state.parameter.page = page;
+            this._loadSongsData(this.state.parameter);
             return true;
         }
     }
