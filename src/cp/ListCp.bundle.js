@@ -530,7 +530,7 @@
 	              );
 	    },
 	    _loadSongsData:function(parms){
-	        var parameter = {cmd: "list", page: "1", item: 20, by: "download", order: "down"};
+	        var parameter = {cmd: "list", page: "1", item: 18, by: "download", order: "down"};
 	        if(parms.page){
 	            parameter.page = parms.page;
 	        }
