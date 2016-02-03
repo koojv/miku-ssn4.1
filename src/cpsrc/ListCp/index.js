@@ -120,7 +120,7 @@ ListCp = React.createClass({
                               <a href="#"><i className="play fa fa-play-circle i-2x"></i></a>
                             </div>
                           </div>
-                          <a href="#"><img src={filebase+song.ID+".jpg"} alt="" className="cover r r-2x img-full"/></a>
+                          <a href="#"><img src={filebase+song.ID+".jpg&time="+new Date().getTime()} alt="" className="cover r r-2x img-full"/></a>
                         </div>
                         <div className="padder-v">
                           <a href="#" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" className="title text-ellipsis">{song.TITLE}</a>

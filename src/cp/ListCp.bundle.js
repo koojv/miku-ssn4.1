@@ -490,7 +490,7 @@
 	                              React.createElement("a", {href: "#"}, React.createElement("i", {className: "play fa fa-play-circle i-2x"}))
 	                            )
 	                          ), 
-	                          React.createElement("a", {href: "#"}, React.createElement("img", {src: filebase+song.ID+".jpg", alt: "", className: "cover r r-2x img-full"}))
+	                          React.createElement("a", {href: "#"}, React.createElement("img", {src: filebase+song.ID+".jpg&time="+new Date().getTime(), alt: "", className: "cover r r-2x img-full"}))
 	                        ), 
 	                        React.createElement("div", {className: "padder-v"}, 
 	                          React.createElement("a", {href: "#", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "title text-ellipsis"}, song.TITLE), 
