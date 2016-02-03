@@ -5,12 +5,14 @@
 1. 以下两条命令可以帮助您快速建立本项目的开发环境
 2. 确保您使用的是您自己的fork库的地址
 3.
+
 ```
 git clone -b master https://github.com/MIKUScallion/miku-ssn4.1.git
 cd miku-ssn4.1
 git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
 
 ```
+4. 接下来需要安装相关的node模块，在src目录下（package.json所在目录下），使用npm install（Linux，Osx需要加sudo）命令即可
 
 ##关于开发工作流－1
 
@@ -30,5 +32,4 @@ git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
 4. 您可以维护已经正在开发的组件（推荐），也可以新建组件进行开发，相关的配置均在webpack.config.js中
 5. 组件开发过程使用"node_modules/.bin/webpack --progress --colors --watch"来打包组件，之后查看效果
 6. 已经开发的组件:AsideCp(网站侧边栏组件)
-
 
