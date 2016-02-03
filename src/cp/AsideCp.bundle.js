@@ -62,7 +62,7 @@
 	    var coverData = ["歌ってみた","Vocaloidカバー曲","UTAUカバー曲"];
 	    function makeTags(tagDatas){
 	        var tags = tagDatas.map(function(tag) {
-	          return React.createElement("li", null, 
+	          return React.createElement("li", {key: tag}, 
 	                    React.createElement("a", {href: "#"}, 
 	                        React.createElement("i", {className: "fa fa-angle-right text-xs"}), 
 	                        React.createElement("span", null, tag)
@@ -78,7 +78,7 @@
 	    
 	    return React.createElement("section", {className: "vbox"}, 
 	            React.createElement("section", {className: "w-f-md scrollable"}, 
-	              React.createElement("div", {className: "slim-scroll", "data-height": "auto", "data-disable-fade-out": "true", "data-distance": "0", "data-size": "10px", "data-railOpacity": "0.2"}, 
+	              React.createElement("div", {className: "slim-scroll", "data-height": "auto", "data-disable-fade-out": "true", "data-distance": "0", "data-size": "10px", "data-railopacity": "0.2"}, 
 	                React.createElement("nav", {className: "nav-primary hidden-xs"}, 
 	                  React.createElement("ul", {className: "nav bg clearfix"}, 
 	                    React.createElement("li", {className: "hidden-nav-xs padder m-t m-b-sm text-xs text-muted"}, 

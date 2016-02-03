@@ -5,15 +5,17 @@
         display: none;
     }
     .pagination{
+        li.first,li.last{
+        }
         @media (max-width: 767px){
             width: 100%;
             li{
                 display: none;
             }
-            li.nextPageLi,li.prePageLi{
+            li.nextPageLi,li.prePageLi,li.first,li.last{
                 display: inline-block;
                 text-align: center;
-                width: 50%;
+                width: 25%;
                 a{
                     width: 100%;
                 }

@@ -9,7 +9,7 @@ AsideCp = React.createClass({
     var coverData = ["歌ってみた","Vocaloidカバー曲","UTAUカバー曲"];
     function makeTags(tagDatas){
         var tags = tagDatas.map(function(tag) {
-          return <li>
+          return <li key={tag}>
                     <a href="#">
                         <i className="fa fa-angle-right text-xs"></i>
                         <span>{tag}</span>
@@ -25,7 +25,7 @@ AsideCp = React.createClass({
     
     return <section className="vbox">
             <section className="w-f-md scrollable">
-              <div className="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">                 
+              <div className="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railopacity="0.2">                 
                 <nav className="nav-primary hidden-xs">
                   <ul className="nav bg clearfix">
                     <li className="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">

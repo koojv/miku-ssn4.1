@@ -112,7 +112,7 @@ ListCp = React.createClass({
             }
         }
         var songs = songData.map(function(song) {
-          return   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+          return   <div key={song.ID} className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div className="item" data-sm={song.ID}>
                         <div className="pos-rlt">
                           <div className="item-overlay opacity r r-2x bg-black">
@@ -130,7 +130,7 @@ ListCp = React.createClass({
                     </div>;
         });
         var pages = pageData.map(function(page){
-            return <li className={page.className}><a href="#" className="numPage">{page.page}</a></li>;
+            return <li key={page.page} className={page.className}><a href="#" className="numPage">{page.page}</a></li>;
         });
         //console.log(pages);
         var loadingClass = "";

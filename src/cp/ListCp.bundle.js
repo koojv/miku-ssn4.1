@@ -482,7 +482,7 @@
 	            }
 	        }
 	        var songs = songData.map(function(song) {
-	          return   React.createElement("div", {className: "col-xs-6 col-sm-4 col-md-3 col-lg-2"}, 
+	          return   React.createElement("div", {key: song.ID, className: "col-xs-6 col-sm-4 col-md-3 col-lg-2"}, 
 	                      React.createElement("div", {className: "item", "data-sm": song.ID}, 
 	                        React.createElement("div", {className: "pos-rlt"}, 
 	                          React.createElement("div", {className: "item-overlay opacity r r-2x bg-black"}, 
@@ -500,7 +500,7 @@
 	                    );
 	        });
 	        var pages = pageData.map(function(page){
-	            return React.createElement("li", {className: page.className}, React.createElement("a", {href: "#", className: "numPage"}, page.page));
+	            return React.createElement("li", {key: page.page, className: page.className}, React.createElement("a", {href: "#", className: "numPage"}, page.page));
 	        });
 	        //console.log(pages);
 	        var loadingClass = "";
@@ -655,7 +655,7 @@
 
 
 	// module
-	exports.push([module.id, "#bjax-target .loading {\n  display: none; }\n\n@media (max-width: 767px) {\n  #bjax-target .pagination {\n    width: 100%; }\n    #bjax-target .pagination li {\n      display: none; }\n    #bjax-target .pagination li.nextPageLi, #bjax-target .pagination li.prePageLi {\n      display: inline-block;\n      text-align: center;\n      width: 50%; }\n      #bjax-target .pagination li.nextPageLi a, #bjax-target .pagination li.prePageLi a {\n        width: 100%; } }\n\n@media (max-width: 767px) {\n  #bjax-target .padder-lg {\n    padding-bottom: 60px; } }\n", ""]);
+	exports.push([module.id, "#bjax-target .loading {\n  display: none; }\n\n@media (max-width: 767px) {\n  #bjax-target .pagination {\n    width: 100%; }\n    #bjax-target .pagination li {\n      display: none; }\n    #bjax-target .pagination li.nextPageLi, #bjax-target .pagination li.prePageLi, #bjax-target .pagination li.first, #bjax-target .pagination li.last {\n      display: inline-block;\n      text-align: center;\n      width: 25%; }\n      #bjax-target .pagination li.nextPageLi a, #bjax-target .pagination li.prePageLi a, #bjax-target .pagination li.first a, #bjax-target .pagination li.last a {\n        width: 100%; } }\n\n@media (max-width: 767px) {\n  #bjax-target .padder-lg {\n    padding-bottom: 60px; } }\n", ""]);
 
 	// exports
 
