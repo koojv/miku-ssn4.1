@@ -389,8 +389,9 @@
 	        //console.log(data);
 	        var songData = new Array();
 	        var pageData = new Array();
+	        var pageTitle = "最新更新";
 	        if(data&&data.STATUS=="[I]OK"){
-	            
+	            pageTitle = pageTitle +"("+data.CURRENTPAGE+"/"+data.TOTALPAGE+")";
 	            for(var i=0;i<data.COUNTPERPAGE;i++){
 	                songData.push(data[i]);
 	            }
@@ -509,12 +510,11 @@
 	            loadingClass = "loaded";
 	        }
 	        //console.log(loadingClass);
-	        
 	        return React.createElement("section", {className: loadingClass+" hbox stretch "}, 
 	                React.createElement("section", null, 
 	                  React.createElement("section", {className: "vbox"}, 
 	                    React.createElement("section", {className: "scrollable padder-lg"}, 
-	                      React.createElement("h2", {className: "font-thin m-b"}, "最新更新"), 
+	                      React.createElement("h2", {className: "font-thin m-b"}, pageTitle), 
 	                      React.createElement("div", {onClick: this.handleSongClick, className: "row row-sm"}, 
 	                          songs
 	                      ), 
