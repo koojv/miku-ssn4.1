@@ -1,6 +1,7 @@
 {
   "repository": "none",
   "license": "UNLICENSED",
+  "description": "none",
   "devDependencies": {
     "css-loader": "^0.23.1",
     "jsx-loader": "^0.13.2",
