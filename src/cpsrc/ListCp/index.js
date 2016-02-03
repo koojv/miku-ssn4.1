@@ -2,32 +2,113 @@ require("./index.scss");
 ListCp = React.createClass({
     getInitialState: function() {
         return{
-            api:"http://125.211.202.141:8023/",
-            data:null
+            data:null,
+            loading:true
         };
     },
     componentDidMount:function(){
-        var self = this;
-        $.get(this.state.api,{cmd: "list", page: "1", item: 20, by: "download", order: "down"},function(data){
-            self.setState({
-                data:data
-            });
-        });
+        this._loadSongsData({page:1});
     },
     render:function(){
         //console.log(this.state);
         //文件存储基础路径
-        var filebase = this.state.api+"?cmd=file&name=";
+        var filebase = this.props.api+"?cmd=file&name=";
         
         //state中保留json字符串，实际使用时将其转成对象
         var data = JSON.parse(this.state.data);
+        //console.log(data);
         var songData = new Array();
-        
+        var pageData = new Array();
         if(data&&data.STATUS=="[I]OK"){
-            for(var i=0;i<data.ITEMPERPAGE;i++){
+            
+            for(var i=0;i<data.COUNTPERPAGE;i++){
                 songData.push(data[i]);
             }
             //console.log(songData);
+            //console.log(data.CURRENTPAGE);
+            //console.log(pageData);
+            pageData = makePageData(10);
+            //参数是一个奇数
+            function makePageData(beShowPageNum){
+                beShowPageNum = beShowPageNum - 2;
+                var pageData = new Array();
+                //对于首页的处理
+                if(data.CURRENTPAGE==1){
+                   pageData.push({"page":1,"className":"first active"});  
+                }else{
+                   pageData.push({"page":1,"className":"first"});
+                }
+                
+                //中间显示几页处理
+                var startPage = parseInt(data.CURRENTPAGE) - Math.floor(beShowPageNum/2);
+                //最小显示正数第二页
+                if(startPage<=1){
+                    startPage = 2;
+                }
+                //最大显示到数第二页
+                var endPage = parseInt(data.CURRENTPAGE) + Math.floor(beShowPageNum/2);
+                if(endPage >= data.TOTALPAGE-1){
+                    endPage = data.TOTALPAGE-1;
+                }
+                
+                for(var i =startPage;i<=endPage;i++){
+                    if(i == data.CURRENTPAGE){
+                       pageData.push({"page":i,"className":"active"});   
+                    }else{
+                       pageData.push({"page":i,"className":""});
+                    }
+                }
+                //不足补充(有BUG)
+                /*
+                console.log(pageData.length,beShowPageNum + 1);
+                if(pageData.length < beShowPageNum + 1){
+                    var addnum = (beShowPageNum + 1)-pageData.length;
+                    //正向补充
+                    var lastpage = pageData[pageData.length-1].page;
+                    if(lastpage <= parseInt(data.TOTALPAGE) - Math.floor(beShowPageNum/2)){
+                        for(var i=lastpage+1;i<=lastpage+addnum;i++){
+                            if(i == data.CURRENTPAGE){
+                               pageData.push({"page":i,"className":"active"});   
+                            }else{
+                               pageData.push({"page":i,"className":""});
+                            }   
+                        }
+                        console.log("正向补充");
+                    }else{
+                        var firstPage = pageData[1];
+                        for(var i = firstPage.page -1;i>=firstPage.page - addnum;i--){
+                            if(i == data.CURRENTPAGE){
+                               pageData.push({"page":i,"className":"active"});   
+                            }else{
+                               pageData.push({"page":i,"className":""});
+                            }
+                        }
+                        //按照page排序
+                        pageData.sort(function(a,b){
+                            if(a.page > b.page){
+                                return 1;
+                            }
+                            if(a.page == b.page){
+                                return 0;
+                            }
+                            if(a.page < b.page){
+                                return -1;
+                            }
+                        });
+                        console.log("反向补充");
+                    }
+                    //反向补充
+                    
+                }
+                */
+                //对于尾页的处理
+                if(data.CURRENTPAGE==data.TOTALPAGE){
+                   pageData.push({"page":data.TOTALPAGE,"className":"last active"});  
+                }else{
+                   pageData.push({"page":data.TOTALPAGE,"className":"last"});
+                }
+                return pageData;
+            }
         }
         var songs = songData.map(function(song) {
           return   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -47,8 +128,19 @@ ListCp = React.createClass({
                       </div>
                     </div>;
         });
+        var pages = pageData.map(function(page){
+            return <li className={page.className}><a href="#" className="numPage">{page.page}</a></li>;
+        });
+        //console.log(pages);
+        var loadingClass = "";
+        if(this.state.loading){
+            loadingClass = "loading";
+        }else{
+            loadingClass = "loaded";
+        }
+        //console.log(loadingClass);
         
-        return <section className="hbox stretch">
+        return <section className={loadingClass+" hbox stretch "}>
                 <section>
                   <section className="vbox">
                     <section className="scrollable padder-lg">
@@ -56,23 +148,38 @@ ListCp = React.createClass({
                       <div onClick={this.handleSongClick} className="row row-sm">
                           {songs}
                       </div>
-                      <ul className="pagination pagination">
-                        <li><a href="#"><i className="fa fa-chevron-left"></i></a></li>
-                        <li className="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i className="fa fa-chevron-right"></i></a></li>
+                      <ul onClick={this.handlePageClick} className="pagination pagination">
+                        <li className="prePageLi"><a href="#" className="prePage"><i className="fa fa-chevron-left"></i></a></li>
+                        {pages}
+                        
+                        <li className="nextPageLi"><a href="#" className="nextPage"><i className="fa fa-chevron-right"></i></a></li>
                       </ul>
                     </section>                    
                   </section>
                 </section>
               </section>;
     },
+    _loadSongsData:function(parms){
+        var parameter = {cmd: "list", page: "1", item: 20, by: "download", order: "down"};
+        if(parms.page){
+            parameter.page = parms.page;
+        }
+        this.setState({
+            loading:true
+        });
+        var self = this;
+        var promise = $.get(this.props.api,parameter);
+        promise.done(function(data){
+            self.setState({
+                data:data,
+                loading:false
+            });
+        });
+        //console.log(promise);
+    },
     handleSongClick:function(event){
         event.preventDefault();
-        var filebase = this.state.api+"?cmd=file&name=";
+        var filebase = this.props.api+"?cmd=file&name=";
         var $target = $(event.target);
         var $item = $($target.parents("div.item")[0]);
         if($target.hasClass("play")||$target.hasClass("title")){
@@ -81,8 +188,8 @@ ListCp = React.createClass({
             var title = $item.find(".title").text();
             var author = $item.find(".author").text();
             var cover = $item.find(".cover").attr("src");
-            //console.log(sm,title,author,cover);
-            addToMyPlaylist(title,author,cover,filebase+sm+".mp3",true)
+            //调用全局事件系统的添加歌曲事件（添加一首歌，并且播放）
+            EventEmitter.dispatch("playSong", { "title":title,"author":author,"cover":cover,"file":filebase+sm+".mp3"});
         }
         function addToMyPlaylist(title,author,cover,href,isplay){
               //当前播放列表去重复
@@ -111,6 +218,33 @@ ListCp = React.createClass({
               if(isplay){
                 myPlaylist.play($("#jp-playlist ul").length-1);
               }
+            return true;
+        }
+    },
+    handlePageClick:function(evnet){
+        evnet.preventDefault();
+        var $target =  $(evnet.target);
+        if($target.hasClass("prePage")||$target.parent().hasClass("prePage")){
+            var data = JSON.parse(this.state.data);
+            var page = parseInt(data.CURRENTPAGE)-1;
+            if(page <= 0){
+                return false;
+            }
+            this._loadSongsData({page:page});
+            return true;
+        }
+        if($target.hasClass("nextPage")||$target.parent().hasClass("nextPage")){
+            var data = JSON.parse(this.state.data);
+            var page = parseInt(data.CURRENTPAGE)+1;
+            if(page > data.TOTALPAGE){
+                return false;
+            }
+            this._loadSongsData({page:page});
+            return true;
+        }
+        if($target.hasClass("numPage")){
+            var page = parseInt($target.text());
+            this._loadSongsData({page:page});
             return true;
         }
     }

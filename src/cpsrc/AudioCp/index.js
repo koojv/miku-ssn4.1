@@ -1,8 +1,7 @@
 require("./index.scss");
 AudioCp = React.createClass({
    componentDidMount:function(){
-      //将myPlaylist暴露出去
-      myPlaylist = new jPlayerPlaylist({
+      var myPlaylist = new jPlayerPlaylist({
         jPlayer: "#jplayer_N",
         cssSelectorAncestor: "#jp_container_N"
       }, [
@@ -26,7 +25,7 @@ AudioCp = React.createClass({
         keyEnabled: true,
         audioFullScreen: false
       });
-
+    
       $(document).on($.jPlayer.event.pause, myPlaylist.cssSelector.jPlayer,  function(){
         $('.musicbar').removeClass('animate');
         $('.jp-play-me').removeClass('active');
@@ -55,8 +54,14 @@ AudioCp = React.createClass({
         }
 
       });
+      //注册一个全局事件（）
+      var self = this;
+      EventEmitter.subscribe("playSong", function(data) {
+          //console.log(data);
+          self._addToMyPlaylist(myPlaylist,data.title,data.author,data.cover,data.file,true);
+      });
    },
-    render:function(){
+   render:function(){
         return <div id="jp_container_N">
                 <div className="jp-type-playlist">
                     <div id="jplayer_N" className="jp-jplayer hide"></div>
@@ -122,5 +127,36 @@ AudioCp = React.createClass({
                       </div>
                 </div>
               </div>;
-    }
+    },
+   //
+   _addToMyPlaylist:function(myPlaylist,title,author,cover,href,isplay){
+      //当前播放列表去重复
+      for(i in myPlaylist.playlist){
+          var item = myPlaylist.playlist[i];
+          //找到重复
+          if(item.mp3 == href || item.title == title){
+              //播放列表中已经存在的这首歌
+              if(isplay){
+                 //注意for in 语法的key是字符串
+                 //会影响jplist
+                 myPlaylist.play(parseInt(i));
+                 return true;
+              }else{
+                return false;
+              }
+          }
+      }
+      //向jplayer播放列表中添加新歌曲
+      //优化，需要每次添加到最开始而不是最后
+      myPlaylist.add({
+            title:title,
+            artist:author,
+            poster:cover,
+            mp3:href
+      });
+      if(isplay){
+        myPlaylist.play($("#jp-playlist ul").length-1);
+      }
+    return true;
+   }
 });

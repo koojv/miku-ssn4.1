@@ -1,4 +1,25 @@
 #bjax-target{
+    .loaded{
+    }
+    .loading{
+        display: none;
+    }
+    .pagination{
+        @media (max-width: 767px){
+            width: 100%;
+            li{
+                display: none;
+            }
+            li.nextPageLi,li.prePageLi{
+                display: inline-block;
+                text-align: center;
+                width: 50%;
+                a{
+                    width: 100%;
+                }
+            }
+        }
+    }
     .padder-lg{
         @media (max-width: 767px){
             padding-bottom: 60px;
