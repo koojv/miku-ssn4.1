@@ -19,8 +19,9 @@ ListCp = React.createClass({
         //console.log(data);
         var songData = new Array();
         var pageData = new Array();
+        var pageTitle = "最新更新";
         if(data&&data.STATUS=="[I]OK"){
-            
+            pageTitle = pageTitle +"("+data.CURRENTPAGE+"/"+data.TOTALPAGE+")";
             for(var i=0;i<data.COUNTPERPAGE;i++){
                 songData.push(data[i]);
             }
@@ -139,12 +140,11 @@ ListCp = React.createClass({
             loadingClass = "loaded";
         }
         //console.log(loadingClass);
-        
         return <section className={loadingClass+" hbox stretch "}>
                 <section>
                   <section className="vbox">
                     <section className="scrollable padder-lg">
-                      <h2 className="font-thin m-b">最新更新</h2>
+                      <h2 className="font-thin m-b">{pageTitle}</h2>
                       <div onClick={this.handleSongClick} className="row row-sm">
                           {songs}
                       </div>
