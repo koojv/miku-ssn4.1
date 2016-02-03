@@ -56,11 +56,14 @@
       </section>
     </section>    
   </section>
+  
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
   <script src="js/jPlayer/jquery.jplayer.min.js"></script>
   <script src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  
+  <script src="myjs/eventEmitter.js"></script>
   
   <script src="cp/HeaderCp.bundle.js"></script>
   <script src="cp/AsideCp.bundle.js"></script>
@@ -81,7 +84,7 @@
             document.getElementById("audioDiv")
       );
       ReactDOM.render(
-            <ListCp/>,
+            <ListCp api="http://125.211.202.141:8023/"/>,
             document.getElementById("bjax-target")
       );
   </script>
