@@ -6,12 +6,15 @@
 2. 确保您使用的是您自己的fork库的地址
 3.
 
+
 ```
 git clone -b master https://github.com/MIKUScallion/miku-ssn4.1.git
 cd miku-ssn4.1
 git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
+
 ```
-4. 接下来需要安装相关的node模块，在src目录下（package.json所在目录下），使用npm install（Linux，Osx需要加sudo）命令即可
+
+接下来需要安装相关的node模块，在src目录下（package.json所在目录下），使用npm install（Linux，Osx需要加sudo）命令即可
 
 ##关于开发工作流－1
 
