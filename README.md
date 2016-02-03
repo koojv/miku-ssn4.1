@@ -31,15 +31,4 @@ git clone -b gh-pages https://github.com/MIKUScallion/miku-ssn4.1.git build
 5. 组件开发过程使用"node_modules/.bin/webpack --progress --colors --watch"来打包组件，之后查看效果
 6. 已经开发的组件:AsideCp(网站侧边栏组件)
 
-##关于node-sass不跨平台带来的编译错误
-1.错误及其原因
-	原项目是在MAC上进行编译，拷贝原来项目中的node-sass在windows下面编译会报错
-	因为node-sass编译（依赖操作系统与硬件）安装的，
-2.解决方式：
-	windows的用户，需要卸载原来项目的node-sass自行安装node-sasswindows的用户，需要卸载原来项目的node-sass自行安装node-sass
-	注意安装版本与package.json依赖关系是否一致
-3.
-```
-npm install --save-dev node-sass
-npm uninstall --save-dev node-sass
-```
+

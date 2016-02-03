@@ -82,7 +82,7 @@
 	            React.createElement("span", {className: "input-group-btn"}, 
 	              React.createElement("button", {type: "submit", className: "btn btn-sm bg-white btn-icon rounded"}, React.createElement("i", {className: "fa fa-search"}))
 	            ), 
-	            React.createElement("input", {type: "text", className: "form-control input-sm no-border rounded", placeholder: "搜索歌曲、专辑..."})
+	            React.createElement("input", {type: "text", className: "form-control input-sm no-border rounded", placeholder: "Search songs, albums..."})
 	          )
 	        )
 	      ), 
