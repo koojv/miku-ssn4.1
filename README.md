@@ -2,9 +2,13 @@
 
 ##欢迎来到《湿湿娘V4.1》项目主页
 本项目（前端部分）主要由三部分构成
+
 1. 源码部分：<https://github.com/MIKUScallion/miku-ssn4.1/tree/master>。
+
 2. 静态资源部分：<https://github.com/MIKUScallion/miku-ssn4.1_static/tree/gh-pages>。
+
 3. 发布代码部分：<https://github.com/MIKUScallion/miku-ssn4.1/tree/gh-pages>。
+
 源码部分主要为react组件代码（面向开发者），静态资源部分为源码提供静态资源的引用（面向开发者），发布代码则是发布打包完成的组件的地方（面向用户）
 
 ##关于工作流
