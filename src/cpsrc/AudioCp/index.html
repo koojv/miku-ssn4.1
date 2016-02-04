@@ -1,170 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" class="app">
+<html lang="zh" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>湿湿娘V4.1</title>
   <meta name="description" content=""/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="../../js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/font.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/app.css" type="text/css" />  
-  <!--[if lt IE 9]>
-    <script src="../../js/ie/html5shiv.js"></script>
-    <script src="../../js/ie/respond.min.js"></script>
-    <script src="../../js/ie/excanvas.js"></script>
-  <![endif]-->
+  <!-- ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <!-- ./ios -->
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/font.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/app.css" type="text/css" />
+  
   <script src="http://cdn.bootcss.com/react/0.14.6/react.min.js"></script>
   <script src="http://cdn.bootcss.com/react/0.14.6/react-dom.min.js"></script>
   <script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body class="">
   <section class="vbox">
-      <section>
-          <section class="hbox stretch">
-              <section id="content">
-                  <section class="vbox">
-                     <section class="w-f-md" id="bjax-target">
-                          <section class="hbox stretch">
-                            <!-- side content -->
-                            <!-- / side content -->
-                            <section>
-                              <section class="vbox">
-                                <section class="scrollable padder-lg">
-                                  <h2 class="font-thin m-b">最新更新</h2>
-                                  <div class="row row-sm">
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Tempered Song</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Miaow</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/m2.jpg" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Morbi id neque quam</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Phasellus</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/a10.png" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Malesuada</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/m4.jpg" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Citudin venenatis ipsum ac</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Volutpat</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/m5.jpg" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Vestibulum ullamcorper sodales nisi</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Mauris Qiaos</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                      <div class="item">
-                                        <div class="pos-rlt">
-                                          <div class="item-overlay opacity r r-2x bg-black">
-                                            <div class="center text-center m-t-n">
-                                              <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                            </div>
-                                          </div>
-                                          <a href="track-detail.html"><img src="../../images/m6.jpg" alt="" class="r r-2x img-full"></a>
-                                        </div>
-                                        <div class="padder-v">
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">Mauris convallis mauris at</a>
-                                          <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Neque</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <ul class="pagination pagination">
-                                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                                  </ul>
-                                </section>                    
-                              </section>
-                            </section>
-                          </section>
-                        </section>
-                     <footer id="audioDiv" class="footer bg-info dker"></footer>
-                  </section>
+   
+    <!-- HeaderCp -->
+    <header id="headerDiv" class="bg-white-only header header-md navbar navbar-fixed-top-xs"></header>
+    <!-- ./HeaderCp -->
+    
+    <section>
+      <section class="hbox stretch">
+        
+        <!-- .AsideCp -->
+        <aside class="bg-dark dk nav-xs aside hidden-print" id="nav"></aside>
+        <!-- /.AsideCp -->
+        
+        <section id="content">
+          <section class="vbox">
+            
+            <!-- ListCp -->
+            <section class="w-f-md" id="bjax-target"></section>
+            <!-- ./ListCp -->
+            
+            <!-- AudioCp -->
+            <footer id="audioDiv" class="footer bg-info dker"></footer>
+            <!-- AudioCp -->
+            
           </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
+        </section>
       </section>
+    </section>    
   </section>
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.js"></script>
-  <script src="../../js/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="../../js/jPlayer/jquery.jplayer.min.js"></script>
-  <script src="../../js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script src="../../cp/AudioCp.bundle.js"></script>
+  
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.min.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/bootstrap.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.slimscroll.min.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.jplayer.min.js"></script>
+  
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jplayer.playlist.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/myjs/eventEmitter.js"></script>
+  
+  <script src="../../cp/HeaderCp.bundle.js"></script>
+  <script src="../../cp/AsideCp.bundle.js"></script>
+  <script src="AudioCp.bundle.js"></script>
+  <script src="../../cp/ListCp.bundle.js"></script>
+  
   <script type="text/babel">
+      ReactDOM.render(
+            <HeaderCp/>,
+            document.getElementById("headerDiv")
+      );
+      ReactDOM.render(
+            <AsideCp/>,
+            document.getElementById("nav")
+      );
       ReactDOM.render(
             <AudioCp/>,
             document.getElementById("audioDiv")
       );
+      ReactDOM.render(
+            <ListCp api="http://125.211.202.141:8023/"/>,
+            document.getElementById("bjax-target")
+      );
   </script>
-  <script src="../../js/app.js"></script>
-  <script src="../../js/app.plugin.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/app.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/app.plugin.js"></script>
 </body>
 </html>

@@ -1,67 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" class="app">
+<html lang="zh" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>湿湿娘V4.1</title>
   <meta name="description" content=""/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="../../js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/font.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/app.css" type="text/css" />  
-  <!--[if lt IE 9]>
-    <script src="../../js/ie/html5shiv.js"></script>
-    <script src="../../js/ie/respond.min.js"></script>
-    <script src="../../js/ie/excanvas.js"></script>
-  <![endif]-->
+  <!-- ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <!-- ./ios -->
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/font.css" type="text/css" />
+  <link rel="stylesheet" href="http://mikuscallion.github.io/miku-ssn4.1_static/css/app.css" type="text/css" />
+  
   <script src="http://cdn.bootcss.com/react/0.14.6/react.min.js"></script>
   <script src="http://cdn.bootcss.com/react/0.14.6/react-dom.min.js"></script>
   <script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body class="">
   <section class="vbox">
-    <header id="headerDiv" class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-    </header>
+   
+    <!-- HeaderCp -->
+    <header id="headerDiv" class="bg-white-only header header-md navbar navbar-fixed-top-xs"></header>
+    <!-- ./HeaderCp -->
+    
     <section>
       <section class="hbox stretch">
-        <!-- .aside -->
+        
+        <!-- .AsideCp -->
         <aside class="bg-dark dk nav-xs aside hidden-print" id="nav"></aside>
-        <!-- /.aside -->
+        <!-- /.AsideCp -->
+        
         <section id="content">
-            <section class="vbox">
-                <section class="w-f-md" id="bjax-target"></section>
-            </section>
+          <section class="vbox">
+            
+            <!-- ListCp -->
+            <section class="w-f-md" id="bjax-target"></section>
+            <!-- ./ListCp -->
+            
+            <!-- AudioCp -->
+            <footer id="audioDiv" class="footer bg-info dker"></footer>
+            <!-- AudioCp -->
+            
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
         </section>
       </section>
     </section>    
   </section>
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.js"></script>
-  <script src="../../js/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="../../js/jPlayer/jquery.jplayer.min.js"></script>
-  <script src="../../js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   
-  <script src="../../cp/AsideCp.bundle.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.min.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/bootstrap.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.slimscroll.min.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jquery.jplayer.min.js"></script>
+  
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/jplayer.playlist.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/myjs/eventEmitter.js"></script>
+  
   <script src="../../cp/HeaderCp.bundle.js"></script>
-  <script src="../../cp/ListCp.bundle.js"></script>
+  <script src="../../cp/AsideCp.bundle.js"></script>
+  <script src="../../cp/AudioCp.bundle.js"></script>
+  <script src="ListCp.bundle.js"></script>
+  
   <script type="text/babel">
+      ReactDOM.render(
+            <HeaderCp/>,
+            document.getElementById("headerDiv")
+      );
       ReactDOM.render(
             <AsideCp/>,
             document.getElementById("nav")
       );
       ReactDOM.render(
-            <HeaderCp/>,
-            document.getElementById("headerDiv")
+            <AudioCp/>,
+            document.getElementById("audioDiv")
       );
       ReactDOM.render(
             <ListCp api="http://125.211.202.141:8023/"/>,
             document.getElementById("bjax-target")
       );
   </script>
-  <script src="../../js/app.js"></script>
-  <script src="../../js/app.plugin.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/app.js"></script>
+  <script src="http://mikuscallion.github.io/miku-ssn4.1_static/js/app.plugin.js"></script>
 </body>
 </html>
