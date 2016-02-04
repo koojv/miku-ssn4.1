@@ -390,6 +390,12 @@
 	            self.state.parameter.keyword = self.state.tag;
 	            self._loadSongsData(self.state.parameter);
 	        });
+	        EventEmitter.subscribe("defaultClickTag", function() {
+	            //console.log("defaultClickTag");
+	            self.state.tag = null;
+	            self.state.parameter = {cmd: "list", page: 1, item: 18, by: "download", order: "down"};
+	            self._loadSongsData(self.state.parameter);
+	        });
 	    },
 	    render:function(){
 	        //console.log(this.state);
@@ -416,88 +422,7 @@
 	            //console.log(songData);
 	            //console.log(data.CURRENTPAGE);
 	            //console.log(pageData);
-	            pageData = makePageData(10);
-	            //参数是一个奇数
-	            function makePageData(beShowPageNum){
-	                beShowPageNum = beShowPageNum - 2;
-	                var pageData = new Array();
-	                //对于首页的处理
-	                if(data.CURRENTPAGE==1){
-	                   pageData.push({"page":1,"className":"first active"});  
-	                }else{
-	                   pageData.push({"page":1,"className":"first"});
-	                }
-	                
-	                //中间显示几页处理
-	                var startPage = parseInt(data.CURRENTPAGE) - Math.floor(beShowPageNum/2);
-	                //最小显示正数第二页
-	                if(startPage<=1){
-	                    startPage = 2;
-	                }
-	                //最大显示到数第二页
-	                var endPage = parseInt(data.CURRENTPAGE) + Math.floor(beShowPageNum/2);
-	                if(endPage >= data.TOTALPAGE-1){
-	                    endPage = data.TOTALPAGE-1;
-	                }
-	                
-	                for(var i =startPage;i<=endPage;i++){
-	                    if(i == data.CURRENTPAGE){
-	                       pageData.push({"page":i,"className":"active"});   
-	                    }else{
-	                       pageData.push({"page":i,"className":""});
-	                    }
-	                }
-	                //不足补充(有BUG)
-	                /*
-	                console.log(pageData.length,beShowPageNum + 1);
-	                if(pageData.length < beShowPageNum + 1){
-	                    var addnum = (beShowPageNum + 1)-pageData.length;
-	                    //正向补充
-	                    var lastpage = pageData[pageData.length-1].page;
-	                    if(lastpage <= parseInt(data.TOTALPAGE) - Math.floor(beShowPageNum/2)){
-	                        for(var i=lastpage+1;i<=lastpage+addnum;i++){
-	                            if(i == data.CURRENTPAGE){
-	                               pageData.push({"page":i,"className":"active"});   
-	                            }else{
-	                               pageData.push({"page":i,"className":""});
-	                            }   
-	                        }
-	                        console.log("正向补充");
-	                    }else{
-	                        var firstPage = pageData[1];
-	                        for(var i = firstPage.page -1;i>=firstPage.page - addnum;i--){
-	                            if(i == data.CURRENTPAGE){
-	                               pageData.push({"page":i,"className":"active"});   
-	                            }else{
-	                               pageData.push({"page":i,"className":""});
-	                            }
-	                        }
-	                        //按照page排序
-	                        pageData.sort(function(a,b){
-	                            if(a.page > b.page){
-	                                return 1;
-	                            }
-	                            if(a.page == b.page){
-	                                return 0;
-	                            }
-	                            if(a.page < b.page){
-	                                return -1;
-	                            }
-	                        });
-	                        console.log("反向补充");
-	                    }
-	                    //反向补充
-	                    
-	                }
-	                */
-	                //对于尾页的处理
-	                if(data.CURRENTPAGE==data.TOTALPAGE){
-	                   pageData.push({"page":data.TOTALPAGE,"className":"last active"});  
-	                }else{
-	                   pageData.push({"page":data.TOTALPAGE,"className":"last"});
-	                }
-	                return pageData;
-	            }
+	            pageData = this._makePageData(data,10);
 	        }else{
 	            errorClass = "error";    
 	        }
@@ -510,7 +435,7 @@
 	                              React.createElement("a", {href: "#"}, React.createElement("i", {className: "play fa fa-play-circle i-2x"}))
 	                            )
 	                          ), 
-	                          React.createElement("a", {href: "#"}, React.createElement("img", {key: new Date().getTime(), src: filebase+song.ID+".jpg", alt: "", className: "cover r r-2x img-full"}))
+	                          React.createElement("a", {href: "#"}, React.createElement("img", {src: filebase+song.ID+".jpg", alt: "", className: "cover r r-2x img-full"}))
 	                        ), 
 	                        React.createElement("div", {className: "padder-v"}, 
 	                          React.createElement("a", {href: "#", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "title text-ellipsis"}, song.TITLE), 
@@ -520,7 +445,7 @@
 	                    );
 	        });
 	        var pages = pageData.map(function(page){
-	            return React.createElement("li", {key: page.page, className: page.className}, React.createElement("a", {href: "#", className: "numPage"}, page.page));
+	            return React.createElement("li", {key: page.page, className: page.className}, React.createElement("a", {"data-page": page.page, href: "#", className: "numPage"}, page.text));
 	        });
 	        //console.log(pages);
 	        if(this.state.loading){
@@ -547,6 +472,86 @@
 	                  )
 	                )
 	              );
+	    },
+	    _makePageData:function(data,beShowPageNum){
+	        beShowPageNum = beShowPageNum - 2;
+	        var pageData = new Array();
+	        //对于首页的处理
+	        if(data.CURRENTPAGE==1){
+	           pageData.push({text:"首页","page":1,"className":"first active"});  
+	        }else{
+	           pageData.push({text:"首页","page":1,"className":"first"});
+	        }
+
+	        //中间显示几页处理
+	        var startPage = parseInt(data.CURRENTPAGE) - Math.floor(beShowPageNum/2);
+	        //最小显示正数第二页
+	        if(startPage<=1){
+	            startPage = 2;
+	        }
+	        //最大显示到数第二页
+	        var endPage = parseInt(data.CURRENTPAGE) + Math.floor(beShowPageNum/2);
+	        if(endPage >= data.TOTALPAGE-1){
+	            endPage = data.TOTALPAGE-1;
+	        }
+
+	        for(var i =startPage;i<=endPage;i++){
+	            if(i == data.CURRENTPAGE){
+	               pageData.push({"text":i,"page":i,"className":"active"});   
+	            }else{
+	               pageData.push({"text":i,"page":i,"className":""});
+	            }
+	        }
+	        //不足补充(有BUG)
+	        /*
+	        console.log(pageData.length,beShowPageNum + 1);
+	        if(pageData.length < beShowPageNum + 1){
+	            var addnum = (beShowPageNum + 1)-pageData.length;
+	            //正向补充
+	            var lastpage = pageData[pageData.length-1].page;
+	            if(lastpage <= parseInt(data.TOTALPAGE) - Math.floor(beShowPageNum/2)){
+	                for(var i=lastpage+1;i<=lastpage+addnum;i++){
+	                    if(i == data.CURRENTPAGE){
+	                       pageData.push({"page":i,"className":"active"});   
+	                    }else{
+	                       pageData.push({"page":i,"className":""});
+	                    }   
+	                }
+	                console.log("正向补充");
+	            }else{
+	                var firstPage = pageData[1];
+	                for(var i = firstPage.page -1;i>=firstPage.page - addnum;i--){
+	                    if(i == data.CURRENTPAGE){
+	                       pageData.push({"page":i,"className":"active"});   
+	                    }else{
+	                       pageData.push({"page":i,"className":""});
+	                    }
+	                }
+	                //按照page排序
+	                pageData.sort(function(a,b){
+	                    if(a.page > b.page){
+	                        return 1;
+	                    }
+	                    if(a.page == b.page){
+	                        return 0;
+	                    }
+	                    if(a.page < b.page){
+	                        return -1;
+	                    }
+	                });
+	                console.log("反向补充");
+	            }
+	            //反向补充
+
+	        }
+	        */
+	        //对于尾页的处理
+	        if(data.CURRENTPAGE==data.TOTALPAGE){
+	           pageData.push({"page":data.TOTALPAGE,"text":"尾页","className":"last active"});  
+	        }else{
+	           pageData.push({"page":data.TOTALPAGE,"text":"尾页","className":"last"});
+	        }
+	        return pageData;
 	    },
 	    _loadSongsData:function(parameter){
 	        this.setState({
@@ -631,7 +636,7 @@
 	            return true;
 	        }
 	        if($target.hasClass("numPage")){
-	            var page = parseInt($target.text());
+	            var page = parseInt($target.attr("data-page"));
 	            this.state.parameter.page = page;
 	            this._loadSongsData(this.state.parameter);
 	            return true;

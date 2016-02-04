@@ -102,6 +102,12 @@
 	                      "分类索引"
 	                    ), 
 	                    React.createElement("li", null, 
+	                      React.createElement("a", {href: "javascript:void(0);", onClick: this.handleDefaultTagClick}, 
+	                        React.createElement("i", {className: "fa-thumbs-up fa text-info"}), 
+	                        React.createElement("span", {className: "font-bold"}, "默认排序")
+	                      )
+	                    ), 
+	                    React.createElement("li", null, 
 	                      React.createElement("a", {href: "javascript:void(0);", className: "auto"}, 
 	                        React.createElement("span", {className: "pull-right text-muted"}, 
 	                          React.createElement("i", {className: "fa fa-angle-left text"}), 
@@ -112,13 +118,13 @@
 	                      ), 
 	                      React.createElement("ul", {onClick: this.handleTagClick, className: "nav dk text-sm"}, singers)
 	                    ), 
-	                    React.createElement("li", null, 
+	                    React.createElement("li", {className: "hide"}, 
 	                      React.createElement("a", {href: "javascript:void(0);", className: "auto"}, 
 	                        React.createElement("span", {className: "pull-right text-muted"}, 
 	                          React.createElement("i", {className: "fa fa-angle-left text"}), 
 	                          React.createElement("i", {className: "fa fa-angle-down text-active"})
 	                        ), 
-	                        React.createElement("i", {className: "icon-list icon  text-info-dker"}), 
+	                        React.createElement("i", {className: "icon-list icon  text-info"}), 
 	                        React.createElement("span", null, "曲风")
 	                      ), 
 	                      React.createElement("ul", {onClick: this.handleTagClick, className: "nav dk text-sm"}, songStyles)
@@ -129,7 +135,7 @@
 	                          React.createElement("i", {className: "fa fa-angle-left text"}), 
 	                          React.createElement("i", {className: "fa fa-angle-down text-active"})
 	                        ), 
-	                        React.createElement("i", {className: "fa fa-microphone icon  text-primary"}), 
+	                        React.createElement("i", {className: "fa fa-microphone icon  text-info"}), 
 	                        React.createElement("span", null, "翻唱")
 	                      ), 
 	                      React.createElement("ul", {onClick: this.handleTagClick, className: "nav dk text-sm"}, covers)
@@ -147,7 +153,7 @@
 	                    ), 
 	                    React.createElement("li", null, 
 	                      React.createElement("a", null, 
-	                        React.createElement("i", {className: "icon-clock icon text-info"}), 
+	                        React.createElement("i", {className: "icon-clock icon text-warning-dker"}), 
 	                        React.createElement("span", null, "最近播放")
 	                      )
 	                    )
@@ -164,6 +170,10 @@
 	     var tag = $li.text();
 	     EventEmitter.dispatch("clickTag",tag);
 	     //alert(tag);
+	  },
+	  handleDefaultTagClick:function(event){
+	      event.preventDefault();
+	      EventEmitter.dispatch("defaultClickTag");
 	  }
 	});
 

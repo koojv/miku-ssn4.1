@@ -1,19 +1,18 @@
 require("./index.scss");
 AudioCp = React.createClass({
    componentDidMount:function(){
+       var backMyPlaylist = localStorage.getItem("myPlaylist");
+      if(backMyPlaylist){
+         backMyPlaylist = JSON.parse(backMyPlaylist);
+      }else{
+         backMyPlaylist = {};
+         backMyPlaylist.original = [];
+         backMyPlaylist.current = 0;
+      }
       var myPlaylist = new jPlayerPlaylist({
         jPlayer: "#jplayer_N",
         cssSelectorAncestor: "#jp_container_N"
-      }, [
-        {
-          title:"発熱エモーション (新式ボカロ調教)",
-          mp3:"http://125.211.202.141:8023/MP3/sm27790524.mp3"
-        },
-        {
-            title:"【初音ミクと巡音ルカが人間のように歌う】愛Dee【ルカが英語でラップ】",
-            mp3:"http://125.211.202.141:8023/?cmd=file&name=sm18047788.mp3"
-        }
-      ], {
+      }, backMyPlaylist.original, {
         playlistOptions: {
           enableRemoveControls: true,
           autoPlay: true
@@ -25,6 +24,9 @@ AudioCp = React.createClass({
         keyEnabled: true,
         audioFullScreen: false
       });
+      myPlaylist.play(backMyPlaylist.current);
+      this.state = {};
+      this.state.myPlaylist = myPlaylist;
     
       $(document).on($.jPlayer.event.pause, myPlaylist.cssSelector.jPlayer,  function(){
         $('.musicbar').removeClass('animate');
@@ -59,6 +61,12 @@ AudioCp = React.createClass({
       EventEmitter.subscribe("playSong", function(data) {
           //console.log(data);
           self._addToMyPlaylist(myPlaylist,data.title,data.author,data.cover,data.file,true);
+          EventEmitter.dispatch("sp");
+      });
+      //全局事件，本地保存播放列表(在jplay-list里有调用，注意)
+      EventEmitter.subscribe("sp",function(){
+        //console.log("update playlist",self.state.myPlaylist);
+        localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
       });
    },
    render:function(){
@@ -130,6 +138,8 @@ AudioCp = React.createClass({
     },
    //
    _addToMyPlaylist:function(myPlaylist,title,author,cover,href,isplay){
+      //播放列表打开
+      //$("#playlist").addClass("open");
       //当前播放列表去重复
       for(i in myPlaylist.playlist){
           var item = myPlaylist.playlist[i];

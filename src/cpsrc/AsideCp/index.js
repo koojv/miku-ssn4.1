@@ -48,6 +48,12 @@ AsideCp = React.createClass({
                     <li className="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
                       分类索引
                     </li>
+                    <li>
+                      <a href="javascript:void(0);" onClick={this.handleDefaultTagClick}>
+                        <i className="fa-thumbs-up fa text-info"></i>
+                        <span className="font-bold">默认排序</span>
+                      </a>
+                    </li>
                     <li >
                       <a href="javascript:void(0);" className="auto">
                         <span className="pull-right text-muted">
@@ -59,13 +65,13 @@ AsideCp = React.createClass({
                       </a>
                       <ul onClick={this.handleTagClick} className="nav dk text-sm">{singers}</ul>
                     </li>
-                    <li >
+                    <li className="hide">
                       <a href="javascript:void(0);" className="auto">
                         <span className="pull-right text-muted">
                           <i className="fa fa-angle-left text"></i>
                           <i className="fa fa-angle-down text-active"></i>
                         </span>
-                        <i className="icon-list icon  text-info-dker"></i>
+                        <i className="icon-list icon  text-info"></i>
                         <span>曲风</span>
                       </a>
                       <ul onClick={this.handleTagClick} className="nav dk text-sm">{songStyles}</ul>
@@ -76,7 +82,7 @@ AsideCp = React.createClass({
                           <i className="fa fa-angle-left text"></i>
                           <i className="fa fa-angle-down text-active"></i>
                         </span>
-                        <i className="fa fa-microphone icon  text-primary"></i>
+                        <i className="fa fa-microphone icon  text-info"></i>
                         <span>翻唱</span>
                       </a>
                       <ul onClick={this.handleTagClick} className="nav dk text-sm">{covers}</ul>
@@ -94,7 +100,7 @@ AsideCp = React.createClass({
                     </li>
                     <li>
                       <a>
-                        <i className="icon-clock icon text-info"></i>
+                        <i className="icon-clock icon text-warning-dker"></i>
                         <span>最近播放</span>
                       </a>
                     </li>
@@ -111,5 +117,9 @@ AsideCp = React.createClass({
      var tag = $li.text();
      EventEmitter.dispatch("clickTag",tag);
      //alert(tag);
+  },
+  handleDefaultTagClick:function(event){
+      event.preventDefault();
+      EventEmitter.dispatch("defaultClickTag");
   }
 });
