@@ -1,5 +1,6 @@
 .DS_Store
+node.md
+push.rb
 build
 static
-node.md
 node_modules
