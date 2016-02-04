@@ -405,6 +405,7 @@
 	      });
 
 	      $(document).on('click', '.jp-play-me', function(e){
+	        console.log("xxxx");
 	        e && e.preventDefault();
 	        var $this = $(e.target);
 	        if (!$this.is('a')) $this = $this.closest('a');
@@ -429,7 +430,7 @@
 	          self._addToMyPlaylist(myPlaylist,data.title,data.author,data.cover,data.file,true);
 	          EventEmitter.dispatch("sp");
 	      });
-	      //全局事件，本地保存播放列表(在jplay-list里有调用，注意)
+	      //全局事件，本地保存播放列表(在jplayer.playlist.min里有多处调用，注意)
 	      EventEmitter.subscribe("sp",function(){
 	        //console.log("update playlist",self.state.myPlaylist);
 	        localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
