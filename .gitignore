@@ -1,5 +1,6 @@
 .DS_Store
 build
+static
 node.md
 node_modules
 node_modules.zip
