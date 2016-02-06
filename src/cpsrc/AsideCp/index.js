@@ -10,7 +10,7 @@ AsideCp = React.createClass({
     function makeTags(tagDatas){
         var tags = tagDatas.map(function(tag) {
           return <li key={tag}>
-                    <a href="#">
+                    <a href="javascript:void(0);">
                         <i className="fa fa-angle-right text-xs"></i>
                         <span>{tag}</span>
                     </a>

@@ -371,16 +371,26 @@
 	__webpack_require__(11);
 	ListCp = React.createClass({displayName: "ListCp",
 	    getInitialState: function() {
+	        //初始化的时候，优先读取hash上的查询串
+	        //这里的hash只是用来记录查询串（便于本页刷新与本页分享），不支持历史记录
+	        var queryString = HashUtil.get();
+	        if(queryString){
+	            var queryObj = HashUtil.toJsonObj(queryString);
+	        }else{
+	            var queryObj = {cmd: "list", page: "1", item: 18, by: "download", order: "down"};
+	        }
+	        //console.log(queryObj);
+	        
 	        return{
 	            data:null,
 	            loading:true,
-	            tag:null,
-	            parameter:{cmd: "list", page: "1", item: 18, by: "download", order: "down"}
+	            tag:queryObj.keyword,
+	            parameter:queryObj
 	        };
 	    },
 	    componentDidMount:function(){
 	        this._loadSongsData(this.state.parameter);
-	        //
+	        
 	        var self = this;
 	        EventEmitter.subscribe("clickTag", function(data) {
 	            //console.log(data);
@@ -411,7 +421,7 @@
 	        var loadingClass = "";
 	        var errorClass = "";
 	        
-	        if(this.state.tag!=null){
+	        if(this.state.tag){
 	            pageTitle = this.state.tag+"/"+pageTitle;
 	        }
 	        if(data&&data.STATUS=="[I]OK"){
@@ -438,8 +448,8 @@
 	                          React.createElement("a", {href: "#"}, React.createElement("img", {src: filebase+song.ID+".jpg", alt: "", className: "cover r r-2x img-full"}))
 	                        ), 
 	                        React.createElement("div", {className: "padder-v"}, 
-	                          React.createElement("a", {href: "#", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "title text-ellipsis"}, song.TITLE), 
-	                          React.createElement("a", {href: "#", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "author text-ellipsis text-xs text-muted"}, song.AUTHOR)
+	                          React.createElement("a", {href: "javascript:void(0);", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "title text-ellipsis"}, song.TITLE), 
+	                          React.createElement("a", {href: "javascript:void(0);", "data-bjax": true, "data-target": "#bjax-target", "data-el": "#bjax-el", "data-replace": "true", className: "author text-ellipsis text-xs text-muted"}, song.AUTHOR)
 	                        )
 	                      )
 	                    );
@@ -557,6 +567,8 @@
 	        this.setState({
 	            loading:true
 	        });
+	        //在加载数据之前，将查询串同步到hash上
+	        HashUtil.set(HashUtil.toQueryString(this.state.parameter));
 	        var self = this;
 	        var promise = $.get(this.props.api,parameter);
 	        promise.done(function(data){

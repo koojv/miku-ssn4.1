@@ -63,7 +63,7 @@
 	    function makeTags(tagDatas){
 	        var tags = tagDatas.map(function(tag) {
 	          return React.createElement("li", {key: tag}, 
-	                    React.createElement("a", {href: "#"}, 
+	                    React.createElement("a", {href: "javascript:void(0);"}, 
 	                        React.createElement("i", {className: "fa fa-angle-right text-xs"}), 
 	                        React.createElement("span", null, tag)
 	                    )
