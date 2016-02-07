@@ -44,6 +44,17 @@ AsideCp = React.createClass({
                       </a>
                     </li>
                   </ul>
+                  <ul className="nav bg clearfix">
+                    <li className="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
+                      友情链接
+                    </li>
+                    <li>
+                      <a href="http://miku-nihonngo.club" target="_black">
+                        <i className="icon-social-dribbble icon text-primary-lter"></i>
+                        <span className="font-bold">米库－日本语</span>
+                      </a>
+                    </li>
+                  </ul>
                   <ul className="nav" data-ride="collapse">
                     <li className="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
                       分类索引

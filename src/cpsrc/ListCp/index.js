@@ -3,9 +3,9 @@ ListCp = React.createClass({
     getInitialState: function() {
         //初始化的时候，优先读取hash上的查询串
         //这里的hash只是用来记录查询串（便于本页刷新与本页分享），不支持历史记录
-        var queryString = HashUtil.get();
+        var queryString = this._hashUtil.get();
         if(queryString){
-            var queryObj = HashUtil.toJsonObj(queryString);
+            var queryObj = this._hashUtil.toJsonObj(queryString);
         }else{
             var queryObj = {cmd: "list", page: "1", item: 18, by: "download", order: "down"};
         }
@@ -72,10 +72,10 @@ ListCp = React.createClass({
                         <div className="pos-rlt">
                           <div className="item-overlay opacity r r-2x bg-black">
                             <div className="center text-center m-t-n">
-                              <a href="#"><i className="play fa fa-play-circle i-2x"></i></a>
+                              <a href="javascript:void(0);"><i className="play fa fa-play-circle i-2x"></i></a>
                             </div>
                           </div>
-                          <a href="#"><img src={filebase+song.ID+".jpg"} alt="" className="cover r r-2x img-full"/></a>
+                          <a href="javascript:void(0);"><img src={filebase+song.ID+".jpg"} alt="" className="cover r r-2x img-full"/></a>
                         </div>
                         <div className="padder-v">
                           <a href="javascript:void(0);" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" className="title text-ellipsis">{song.TITLE}</a>
@@ -85,7 +85,7 @@ ListCp = React.createClass({
                     </div>;
         });
         var pages = pageData.map(function(page){
-            return <li key={page.page} className={page.className}><a data-page={page.page} href="#" className="numPage">{page.text}</a></li>;
+            return <li key={page.page} className={page.className}><a data-page={page.page} href="javascript:void(0);" className="numPage">{page.text}</a></li>;
         });
         //console.log(pages);
         if(this.state.loading){
@@ -103,10 +103,10 @@ ListCp = React.createClass({
                           {songs}
                       </div>
                       <ul onClick={this.handlePageClick} className="pagination pagination">
-                        <li className="prePageLi"><a href="#" className="prePage"><i className="fa fa-chevron-left"></i></a></li>
+                        <li className="prePageLi"><a href="javascript:void(0);" className="prePage"><i className="fa fa-chevron-left"></i></a></li>
                         {pages}
                         
-                        <li className="nextPageLi"><a href="#" className="nextPage"><i className="fa fa-chevron-right"></i></a></li>
+                        <li className="nextPageLi"><a href="javascript:void(0);" className="nextPage"><i className="fa fa-chevron-right"></i></a></li>
                       </ul>
                     </section>                    
                   </section>
@@ -198,7 +198,7 @@ ListCp = React.createClass({
             loading:true
         });
         //在加载数据之前，将查询串同步到hash上
-        HashUtil.set(HashUtil.toQueryString(this.state.parameter));
+        this._hashUtil.set(this._hashUtil.toQueryString(this.state.parameter));
         var self = this;
         var promise = $.get(this.props.api,parameter);
         promise.done(function(data){
@@ -208,6 +208,61 @@ ListCp = React.createClass({
             });
         });
         //console.log(promise);
+    },
+    _hashUtil:{
+        toJsonObj: function(queryString){ 
+            var arr = queryString.split("&");
+            var ret="{";
+            for(var i=0;i<arr.length;i++){
+                var tmparr=arr[i].split("=");
+                ret+="\"";
+                ret+=tmparr[0];
+                ret+="\":\"";
+                ret+=tmparr[1];
+                ret+="\"";
+                if (i<arr.length-1) ret+=",";
+            }
+            ret+="}";
+            ret = decodeURIComponent(ret);
+            ret = JSON.parse(ret);
+            return ret;
+        },
+        toQueryString: function(jsonObj){
+            var ret="";
+            //var jsonObj = eval('(' + json + ')');
+            for(var key in jsonObj){
+                //alert(key+':'+json[i][key]);
+                ret+=key + "=" + encodeURIComponent(jsonObj[key]) + "&";
+                }
+            //去除最后一个&
+            ret = ret.slice(0,ret.length - 1);
+            return ret;
+        },
+        get:function(){
+            var url = window.location.href;
+            //console.log(url);
+            var index = url.indexOf("#");
+            if(index!= -1){
+                var queryString = url.slice(index+1,url.length);
+                return queryString;   
+            }else{
+                return null;
+            }
+        },
+        set:function(queryString){
+            var url = window.location.href;
+            //console.log(url);
+            var index = url.indexOf("#");
+            if(index!= -1){
+                var orgurl = url.slice(0,index);
+            }else{
+                var orgurl = url;
+            }
+            //console.log(orgurl);
+            var url = orgurl + "#" + queryString;
+            window.location.replace(url);
+            //console.log(url);
+        }
     },
     handleSongClick:function(event){
         event.preventDefault();
