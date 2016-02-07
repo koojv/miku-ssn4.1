@@ -97,6 +97,17 @@
 	                      )
 	                    )
 	                  ), 
+	                  React.createElement("ul", {className: "nav bg clearfix"}, 
+	                    React.createElement("li", {className: "hidden-nav-xs padder m-t m-b-sm text-xs text-muted"}, 
+	                      "友情链接"
+	                    ), 
+	                    React.createElement("li", null, 
+	                      React.createElement("a", {href: "http://miku-nihonngo.club", target: "_black"}, 
+	                        React.createElement("i", {className: "icon-social-dribbble icon text-primary-lter"}), 
+	                        React.createElement("span", {className: "font-bold"}, "米库－日本语")
+	                      )
+	                    )
+	                  ), 
 	                  React.createElement("ul", {className: "nav", "data-ride": "collapse"}, 
 	                    React.createElement("li", {className: "hidden-nav-xs padder m-t m-b-sm text-xs text-muted"}, 
 	                      "分类索引"
