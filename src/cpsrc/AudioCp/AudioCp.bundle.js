@@ -186,6 +186,9 @@
 	                              React.createElement("a", {className: "jp-repeat", title: "repeat"}, React.createElement("i", {className: "icon-loop text-muted"})), 
 	                              React.createElement("a", {className: "jp-repeat-off hid", title: "repeat off"}, React.createElement("i", {className: "icon-loop text-lt"}))
 	                            ), 
+	                            React.createElement("div", null, 
+	                              React.createElement("a", {onClick: this.handlePv, className: "jp-pv", title: "view pv"}, React.createElement("i", {className: "fa fa-video-camera"}))
+	                            ), 
 	                            React.createElement("div", {className: "hide"}, 
 	                              React.createElement("a", {className: "jp-full-screen", title: "full screen"}, React.createElement("i", {className: "fa fa-expand"})), 
 	                              React.createElement("a", {className: "jp-restore-screen", title: "restore screen"}, React.createElement("i", {className: "fa fa-compress text-lt"}))
@@ -254,6 +257,10 @@
 	           this.setState({"playstate":"listloop"});
 	           $(".jp-shuffle-off").click();
 	       }
+	   },
+	   handlePv:function(event){
+	       var pvfile = $("#jp_audio_0").attr("src").replace(".mp3",".mp4");
+	       window.location.href = pvfile;
 	   }
 	});
 

@@ -133,6 +133,9 @@ AudioCp = React.createClass({
                               <a className="jp-repeat" title="repeat"><i className="icon-loop text-muted"></i></a>
                               <a className="jp-repeat-off hid" title="repeat off"><i className="icon-loop text-lt"></i></a>
                             </div>
+                            <div>
+                              <a onClick={this.handlePv} className="jp-pv" title="view pv"><i className="fa fa-video-camera"></i></a>
+                            </div>
                             <div className="hide">
                               <a className="jp-full-screen" title="full screen"><i className="fa fa-expand"></i></a>
                               <a className="jp-restore-screen" title="restore screen"><i className="fa fa-compress text-lt"></i></a>
@@ -201,5 +204,9 @@ AudioCp = React.createClass({
            this.setState({"playstate":"listloop"});
            $(".jp-shuffle-off").click();
        }
+   },
+   handlePv:function(event){
+       var pvfile = $("#jp_audio_0").attr("src").replace(".mp3",".mp4");
+       window.location.href = pvfile;
    }
 });
