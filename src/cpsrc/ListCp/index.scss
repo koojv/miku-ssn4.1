@@ -1,11 +1,31 @@
 #bjax-target{
     .loaded{
+        background-color: white;
+        section{
+            display: block;
+        }
     }
     .loading{
-        display: none;
+        background-image: url(../../../static/imgs/loadingbg.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        @media (max-width: 767px){
+            min-height: 458px;
+        }
+        section{
+            display: none;
+        }
     }
     .error{
-        display: none;
+        background-image: url(../../../static/imgs/loadingbg.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        @media (max-width: 767px){
+            min-height: 568px;
+        }
+        section{
+            display: none;
+        }
     }
     .pagination{
         li.first,li.last{

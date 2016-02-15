@@ -15,7 +15,9 @@ module.exports = {
             { test: /\.scss$/, loader: "style!css!sass" },
             { test: /\.css$/, loader: "style!css" },
             //js文件都用jsx加载器加载，同时兼容js与jsx
-            { test: /\.js$/, loader: "jsx" }
+            { test: /\.js$/, loader: "jsx" },
+            //file-loader
+            { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192'}
         ]
     }
 };
