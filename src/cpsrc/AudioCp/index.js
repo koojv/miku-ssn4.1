@@ -1,5 +1,8 @@
 require("./index.scss");
 AudioCp = React.createClass({
+   getInitialState:function(){
+       return {"playstate":"listloop"};
+   },
    componentDidMount:function(){
        var backMyPlaylist = localStorage.getItem("myPlaylist");
       if(backMyPlaylist){
@@ -57,6 +60,8 @@ AudioCp = React.createClass({
         }
 
       });
+      //默认列表循环
+      $(".jp-repeat").click();
       //注册一个全局事件（）
       var self = this;
       EventEmitter.subscribe("playSong", function(data) {
@@ -71,6 +76,8 @@ AudioCp = React.createClass({
       });
    },
    render:function(){
+        var playstateClass = this.state.playstate;
+       
         return <div id="jp_container_N">
                 <div className="jp-type-playlist">
                     <div id="jplayer_N" className="jp-jplayer hide"></div>
@@ -110,11 +117,19 @@ AudioCp = React.createClass({
                                 <div className="jp-volume-bar-value lter"></div>
                               </div>
                             </div>
-                            <div>
+                            <div className="myjptoogles" onClick={this.handleMyjptoogles}>
+                                <div className={playstateClass}>
+                                <a className="myjp-listloop" title="list loop"><i className="icon-loop text-lt"></i></a>
+                                    
+                                <a className="myjp-listshuffle" title="list shuffle"><i className="icon-shuffle text-lt"></i></a>
+                                <a className="myjp-singleloop" title="single loop"><i className="icon-refresh text-lt"></i></a>
+                                </div>  
+                            </div>
+                            <div className="hide">
                               <a className="jp-shuffle" title="shuffle"><i className="icon-shuffle text-muted"></i></a>
                               <a className="jp-shuffle-off hid" title="shuffle off"><i className="icon-shuffle text-lt"></i></a>
                             </div>
-                            <div>
+                            <div className="hide">
                               <a className="jp-repeat" title="repeat"><i className="icon-loop text-muted"></i></a>
                               <a className="jp-repeat-off hid" title="repeat off"><i className="icon-loop text-lt"></i></a>
                             </div>
@@ -169,5 +184,22 @@ AudioCp = React.createClass({
         myPlaylist.play($("#jp-playlist ul").length-1);
       }
     return true;
+   },
+   handleMyjptoogles:function(event){
+       var $target = $(event.target);
+       var $myjptoogles = $target.parents("div.myjptoogles");
+       if($target.hasClass("myjp-listloop")||$target.parent().hasClass("myjp-listloop")){
+           this.setState({"playstate":"singleloop"});
+           $("#jp_audio_0").attr("loop","true");
+       }
+       if($target.hasClass("myjp-singleloop")||$target.parent().hasClass("myjp-singleloop")){
+           this.setState({"playstate":"listshuffle"});
+           $("#jp_audio_0").removeAttr("loop");
+           $(".jp-shuffle").click();
+       }
+       if($target.hasClass("myjp-listshuffle")||$target.parent().hasClass("myjp-listshuffle")){
+           this.setState({"playstate":"listloop"});
+           $(".jp-shuffle-off").click();
+       }
    }
 });

@@ -5,4 +5,40 @@
         z-index: 999;
         bottom: 0px;   
     }
+    //播放顺序控制处理
+    .myjptoogles{
+        .listloop{
+            .myjp-listloop{
+                display: inline-block;
+            }
+            .myjp-listshuffle{
+                display: none;
+            }
+            .myjp-singleloop{
+                display: none;
+            }
+        }
+        .singleloop{
+            .myjp-listloop{
+                display: none;
+            }
+            .myjp-listshuffle{
+                display: none;
+            }
+            .myjp-singleloop{
+                display: inline-block;
+            }
+        }
+        .listshuffle{
+            .myjp-listloop{
+                display: none;
+            }
+            .myjp-listshuffle{
+                display: inline-block;
+            }
+            .myjp-singleloop{
+                display: none;
+            }
+        }
+    }
 }

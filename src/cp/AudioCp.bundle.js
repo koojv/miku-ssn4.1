@@ -366,6 +366,9 @@
 
 	__webpack_require__(7);
 	AudioCp = React.createClass({displayName: "AudioCp",
+	   getInitialState:function(){
+	       return {"playstate":"listloop"};
+	   },
 	   componentDidMount:function(){
 	       var backMyPlaylist = localStorage.getItem("myPlaylist");
 	      if(backMyPlaylist){
@@ -423,6 +426,8 @@
 	        }
 
 	      });
+	      //默认列表循环
+	      $(".jp-repeat").click();
 	      //注册一个全局事件（）
 	      var self = this;
 	      EventEmitter.subscribe("playSong", function(data) {
@@ -437,6 +442,8 @@
 	      });
 	   },
 	   render:function(){
+	        var playstateClass = this.state.playstate;
+	       
 	        return React.createElement("div", {id: "jp_container_N"}, 
 	                React.createElement("div", {className: "jp-type-playlist"}, 
 	                    React.createElement("div", {id: "jplayer_N", className: "jp-jplayer hide"}), 
@@ -476,11 +483,19 @@
 	                                React.createElement("div", {className: "jp-volume-bar-value lter"})
 	                              )
 	                            ), 
-	                            React.createElement("div", null, 
+	                            React.createElement("div", {className: "myjptoogles", onClick: this.handleMyjptoogles}, 
+	                                React.createElement("div", {className: playstateClass}, 
+	                                React.createElement("a", {className: "myjp-listloop", title: "list loop"}, React.createElement("i", {className: "icon-loop text-lt"})), 
+	                                    
+	                                React.createElement("a", {className: "myjp-listshuffle", title: "list shuffle"}, React.createElement("i", {className: "icon-shuffle text-lt"})), 
+	                                React.createElement("a", {className: "myjp-singleloop", title: "single loop"}, React.createElement("i", {className: "icon-refresh text-lt"}))
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "hide"}, 
 	                              React.createElement("a", {className: "jp-shuffle", title: "shuffle"}, React.createElement("i", {className: "icon-shuffle text-muted"})), 
 	                              React.createElement("a", {className: "jp-shuffle-off hid", title: "shuffle off"}, React.createElement("i", {className: "icon-shuffle text-lt"}))
 	                            ), 
-	                            React.createElement("div", null, 
+	                            React.createElement("div", {className: "hide"}, 
 	                              React.createElement("a", {className: "jp-repeat", title: "repeat"}, React.createElement("i", {className: "icon-loop text-muted"})), 
 	                              React.createElement("a", {className: "jp-repeat-off hid", title: "repeat off"}, React.createElement("i", {className: "icon-loop text-lt"}))
 	                            ), 
@@ -535,6 +550,23 @@
 	        myPlaylist.play($("#jp-playlist ul").length-1);
 	      }
 	    return true;
+	   },
+	   handleMyjptoogles:function(event){
+	       var $target = $(event.target);
+	       var $myjptoogles = $target.parents("div.myjptoogles");
+	       if($target.hasClass("myjp-listloop")||$target.parent().hasClass("myjp-listloop")){
+	           this.setState({"playstate":"singleloop"});
+	           $("#jp_audio_0").attr("loop","true");
+	       }
+	       if($target.hasClass("myjp-singleloop")||$target.parent().hasClass("myjp-singleloop")){
+	           this.setState({"playstate":"listshuffle"});
+	           $("#jp_audio_0").removeAttr("loop");
+	           $(".jp-shuffle").click();
+	       }
+	       if($target.hasClass("myjp-listshuffle")||$target.parent().hasClass("myjp-listshuffle")){
+	           this.setState({"playstate":"listloop"});
+	           $(".jp-shuffle-off").click();
+	       }
 	   }
 	});
 
@@ -573,7 +605,7 @@
 
 
 	// module
-	exports.push([module.id, "@media (max-width: 767px) {\n  #audioDiv {\n    position: fixed;\n    width: 100%;\n    z-index: 999;\n    bottom: 0px; } }\n", ""]);
+	exports.push([module.id, "@media (max-width: 767px) {\n  #audioDiv {\n    position: fixed;\n    width: 100%;\n    z-index: 999;\n    bottom: 0px; } }\n\n#audioDiv .myjptoogles .listloop .myjp-listloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .listloop .myjp-singleloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-singleloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listshuffle {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-singleloop {\n  display: none; }\n", ""]);
 
 	// exports
 
