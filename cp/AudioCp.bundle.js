@@ -440,7 +440,7 @@
 	      EventEmitter.subscribe("sp",function(){
 	        //console.log("update playlist",self.state.myPlaylist);
 	        localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
-	        this.setState({playmodel:"audio"});
+	        self.setState({playmodel:"audio"});
 	      });
 	   },
 	   render:function(){
