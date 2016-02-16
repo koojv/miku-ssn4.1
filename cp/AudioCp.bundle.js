@@ -590,6 +590,10 @@
 	       if(!temp){
 	           return false;
 	       }
+	       if($("body").width()<767){
+	           window.location.href = temp._m4v;
+	           return;
+	       }
 	       if(temp.mp3 == null){
 	            temp.mp3 = temp._mp3;
 	            temp.m4v = null;
