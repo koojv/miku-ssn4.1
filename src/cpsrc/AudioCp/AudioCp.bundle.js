@@ -54,10 +54,11 @@
 	__webpack_require__(2);
 	AudioCp = React.createClass({displayName: "AudioCp",
 	   getInitialState:function(){
-	       return {"playstate":"listloop"};
+	       return {playstate:"listloop",playmodel:"audio"};
 	   },
 	   componentDidMount:function(){
-	       var backMyPlaylist = localStorage.getItem("myPlaylist");
+	      var backMyPlaylist = localStorage.getItem("myPlaylist");
+	      //backMyPlaylist = null;
 	      if(backMyPlaylist){
 	         backMyPlaylist = JSON.parse(backMyPlaylist);
 	      }else{
@@ -75,13 +76,13 @@
 	        },
 	        //不支持非H5浏览器
 	        //swfPath: "js/jPlayer",
-	        supplied: "webmv, ogv, m4v, oga, mp3",
+	        supplied: "mp3,m4v",
 	        smoothPlayBar: true,
 	        keyEnabled: true,
 	        audioFullScreen: false
 	      });
 	      myPlaylist.play(backMyPlaylist.current);
-	      this.state = {};
+	      //this.state = {};
 	      this.state.myPlaylist = myPlaylist;
 	    
 	      $(document).on($.jPlayer.event.pause, myPlaylist.cssSelector.jPlayer,  function(){
@@ -126,14 +127,19 @@
 	      EventEmitter.subscribe("sp",function(){
 	        //console.log("update playlist",self.state.myPlaylist);
 	        localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
+	        this.setState({playmodel:"audio"});
 	      });
 	   },
 	   render:function(){
 	        var playstateClass = this.state.playstate;
-	       
+	        var playmodelClass = this.state.playmodel;
+	        //console.log(playstateClass);
+	        //console.log(playmodelClass);
 	        return React.createElement("div", {id: "jp_container_N"}, 
-	                React.createElement("div", {className: "jp-type-playlist"}, 
-	                    React.createElement("div", {id: "jplayer_N", className: "jp-jplayer hide"}), 
+	                React.createElement("div", {className: playmodelClass+" jp-type-playlist"}, 
+	                    React.createElement("div", {className: "myjpview"}, 
+	                        React.createElement("div", {id: "jplayer_N", className: "jp-jplayer"})
+	                    ), 
 	                    React.createElement("div", {className: "jp-gui"}, 
 	                        React.createElement("div", {className: "jp-video-play hide"}, 
 	                          React.createElement("a", {className: "jp-video-play-icon"}, "play")
@@ -189,7 +195,7 @@
 	                            React.createElement("div", null, 
 	                              React.createElement("a", {onClick: this.handlePv, className: "jp-pv", title: "view pv"}, React.createElement("i", {className: "fa fa-video-camera"}))
 	                            ), 
-	                            React.createElement("div", {className: "hide"}, 
+	                            React.createElement("div", {className: "myjpfullscreen"}, 
 	                              React.createElement("a", {className: "jp-full-screen", title: "full screen"}, React.createElement("i", {className: "fa fa-expand"})), 
 	                              React.createElement("a", {className: "jp-restore-screen", title: "restore screen"}, React.createElement("i", {className: "fa fa-compress text-lt"}))
 	                            )
@@ -210,6 +216,8 @@
 	    },
 	   //
 	   _addToMyPlaylist:function(myPlaylist,title,author,cover,href,isplay){
+	      var mp3 = href;
+	      var m4v = href.replace("mp3","mp4");
 	      //播放列表打开
 	      //$("#playlist").addClass("open");
 	      //当前播放列表去重复
@@ -234,7 +242,10 @@
 	            title:title,
 	            artist:author,
 	            poster:cover,
-	            mp3:href
+	            _mp3:mp3,
+	            _m4v:m4v,
+	            mp3:mp3,
+	            m4v:null
 	      });
 	      if(isplay){
 	        myPlaylist.play($("#jp-playlist ul").length-1);
@@ -259,8 +270,33 @@
 	       }
 	   },
 	   handlePv:function(event){
-	       var pvfile = $("#jp_audio_0").attr("src").replace(".mp3",".mp4");
-	       window.location.href = pvfile;
+	       var myPlaylist = this.state.myPlaylist;
+	       var playlist = myPlaylist.playlist;
+	       var current = myPlaylist.current;
+	       var temp = playlist[current];
+	       if(!temp){
+	           return false;
+	       }
+	       if(temp.mp3 == null){
+	            temp.mp3 = temp._mp3;
+	            temp.m4v = null;
+	        }else if(temp.m4v == null){
+	            temp.mp3 = null;
+	            temp.m4v = temp._m4v;
+	        }
+	       if(this.state.playmodel == "audio"){  
+	         this.setState({playmodel:"pv"});
+	       }else{
+	         this.setState({playmodel:"audio"}); 
+	       }
+	       myPlaylist.setPlaylist(playlist);
+	       myPlaylist.play(current);
+	       var h = $("#bjax-target").height();
+	       if(h>document.documentElement.clientHeight){
+	           h = document.documentElement.clientHeight - 50 -60;
+	       }
+	       $(".myjpview").height(h);
+	       //console.log(h);
 	   }
 	});
 
@@ -299,7 +335,7 @@
 
 
 	// module
-	exports.push([module.id, "@media (max-width: 767px) {\n  #audioDiv {\n    position: fixed;\n    width: 100%;\n    z-index: 999;\n    bottom: 0px; } }\n\n#audioDiv .myjptoogles .listloop .myjp-listloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .listloop .myjp-singleloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-singleloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listshuffle {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-singleloop {\n  display: none; }\n", ""]);
+	exports.push([module.id, "@media (max-width: 767px) {\n  #audioDiv {\n    position: fixed;\n    width: 100%;\n    z-index: 999;\n    bottom: 0px; } }\n\n#audioDiv .myjptoogles .listloop .myjp-listloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .listloop .myjp-singleloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-listshuffle {\n  display: none; }\n\n#audioDiv .myjptoogles .singleloop .myjp-singleloop {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listloop {\n  display: none; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-listshuffle {\n  display: inline-block; }\n\n#audioDiv .myjptoogles .listshuffle .myjp-singleloop {\n  display: none; }\n\n#audioDiv .audio .myjpview {\n  display: none; }\n\n#audioDiv .audio .myjpfullscreen {\n  display: none; }\n\n#audioDiv .pv .myjpview {\n  padding: 30px;\n  padding-top: 60px;\n  width: 100%;\n  height: auto; }\n  #audioDiv .pv .myjpview #jplayer_N {\n    margin: 0 auto;\n    width: auto !important;\n    max-width: 1024px;\n    height: auto !important; }\n    #audioDiv .pv .myjpview #jplayer_N video {\n      width: 100% !important;\n      height: auto !important; }\n    #audioDiv .pv .myjpview #jplayer_N img {\n      display: none !important; }\n\n#audioDiv .pv .myjpfullscreen {\n  display: none; }\n", ""]);
 
 	// exports
 

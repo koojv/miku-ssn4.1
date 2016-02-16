@@ -1,10 +1,11 @@
 require("./index.scss");
 AudioCp = React.createClass({
    getInitialState:function(){
-       return {"playstate":"listloop"};
+       return {playstate:"listloop",playmodel:"audio"};
    },
    componentDidMount:function(){
-       var backMyPlaylist = localStorage.getItem("myPlaylist");
+      var backMyPlaylist = localStorage.getItem("myPlaylist");
+      //backMyPlaylist = null;
       if(backMyPlaylist){
          backMyPlaylist = JSON.parse(backMyPlaylist);
       }else{
@@ -22,13 +23,13 @@ AudioCp = React.createClass({
         },
         //不支持非H5浏览器
         //swfPath: "js/jPlayer",
-        supplied: "webmv, ogv, m4v, oga, mp3",
+        supplied: "mp3,m4v",
         smoothPlayBar: true,
         keyEnabled: true,
         audioFullScreen: false
       });
       myPlaylist.play(backMyPlaylist.current);
-      this.state = {};
+      //this.state = {};
       this.state.myPlaylist = myPlaylist;
     
       $(document).on($.jPlayer.event.pause, myPlaylist.cssSelector.jPlayer,  function(){
@@ -73,14 +74,19 @@ AudioCp = React.createClass({
       EventEmitter.subscribe("sp",function(){
         //console.log("update playlist",self.state.myPlaylist);
         localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
+        this.setState({playmodel:"audio"});
       });
    },
    render:function(){
         var playstateClass = this.state.playstate;
-       
+        var playmodelClass = this.state.playmodel;
+        //console.log(playstateClass);
+        //console.log(playmodelClass);
         return <div id="jp_container_N">
-                <div className="jp-type-playlist">
-                    <div id="jplayer_N" className="jp-jplayer hide"></div>
+                <div className={playmodelClass+" jp-type-playlist"}>
+                    <div className="myjpview">
+                        <div id="jplayer_N" className="jp-jplayer"></div>
+                    </div>
                     <div className="jp-gui">
                         <div className="jp-video-play hide">
                           <a className="jp-video-play-icon">play</a>
@@ -136,7 +142,7 @@ AudioCp = React.createClass({
                             <div>
                               <a onClick={this.handlePv} className="jp-pv" title="view pv"><i className="fa fa-video-camera"></i></a>
                             </div>
-                            <div className="hide">
+                            <div className="myjpfullscreen">
                               <a className="jp-full-screen" title="full screen"><i className="fa fa-expand"></i></a>
                               <a className="jp-restore-screen" title="restore screen"><i className="fa fa-compress text-lt"></i></a>
                             </div>
@@ -157,6 +163,8 @@ AudioCp = React.createClass({
     },
    //
    _addToMyPlaylist:function(myPlaylist,title,author,cover,href,isplay){
+      var mp3 = href;
+      var m4v = href.replace("mp3","mp4");
       //播放列表打开
       //$("#playlist").addClass("open");
       //当前播放列表去重复
@@ -181,7 +189,10 @@ AudioCp = React.createClass({
             title:title,
             artist:author,
             poster:cover,
-            mp3:href
+            _mp3:mp3,
+            _m4v:m4v,
+            mp3:mp3,
+            m4v:null
       });
       if(isplay){
         myPlaylist.play($("#jp-playlist ul").length-1);
@@ -206,7 +217,32 @@ AudioCp = React.createClass({
        }
    },
    handlePv:function(event){
-       var pvfile = $("#jp_audio_0").attr("src").replace(".mp3",".mp4");
-       window.location.href = pvfile;
+       var myPlaylist = this.state.myPlaylist;
+       var playlist = myPlaylist.playlist;
+       var current = myPlaylist.current;
+       var temp = playlist[current];
+       if(!temp){
+           return false;
+       }
+       if(temp.mp3 == null){
+            temp.mp3 = temp._mp3;
+            temp.m4v = null;
+        }else if(temp.m4v == null){
+            temp.mp3 = null;
+            temp.m4v = temp._m4v;
+        }
+       if(this.state.playmodel == "audio"){  
+         this.setState({playmodel:"pv"});
+       }else{
+         this.setState({playmodel:"audio"}); 
+       }
+       myPlaylist.setPlaylist(playlist);
+       myPlaylist.play(current);
+       var h = $("#bjax-target").height();
+       if(h>document.documentElement.clientHeight){
+           h = document.documentElement.clientHeight - 50 -60;
+       }
+       $(".myjpview").height(h);
+       //console.log(h);
    }
 });

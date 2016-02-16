@@ -41,4 +41,36 @@
             }
         }
     }
+    .audio{
+        .myjpview{
+            display: none;
+        }
+        .myjpfullscreen{
+            display: none;
+        }
+    }
+    .pv{
+       .myjpview{
+            padding: 30px;
+            padding-top: 60px;
+            width: 100%;
+            height: auto;
+            #jplayer_N{
+                margin: 0 auto;
+                width: auto !important;
+                max-width: 1024px;
+                height: auto !important;
+                video{
+                    width: 100% !important;
+                    height: auto !important;
+                }
+                img{
+                    display: none !important;
+                }
+            }
+        }
+        .myjpfullscreen{
+            display:none;
+        }
+    }
 }
