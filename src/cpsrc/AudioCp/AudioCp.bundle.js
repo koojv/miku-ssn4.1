@@ -127,7 +127,7 @@
 	      EventEmitter.subscribe("sp",function(){
 	        //console.log("update playlist",self.state.myPlaylist);
 	        localStorage.setItem("myPlaylist",JSON.stringify(self.state.myPlaylist));
-	        this.setState({playmodel:"audio"});
+	        self.setState({playmodel:"audio"});
 	      });
 	   },
 	   render:function(){
@@ -276,6 +276,10 @@
 	       var temp = playlist[current];
 	       if(!temp){
 	           return false;
+	       }
+	       if($("body").width()<767){
+	           window.location.href = temp._m4v;
+	           return;
 	       }
 	       if(temp.mp3 == null){
 	            temp.mp3 = temp._mp3;
